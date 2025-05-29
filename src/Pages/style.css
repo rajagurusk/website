@@ -1,0 +1,60 @@
+/* Responsive styles (mobile) */
+@media (max-width: 768px) {
+  .header-image {
+    height: 200px;
+  }
+
+  .textOverlay,
+  .secondTextOverlay {
+    font-size: 20px;
+    right: 5%;
+  }
+
+  .textOverlay {
+    top: 10%;
+  }
+
+  .secondTextOverlay {
+    top: 25%;
+  }
+
+  .buttonStyle {
+    top: 40%;
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .about-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .text-content h2 {
+    font-size: 24px;
+  }
+
+  .text-content p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about-image {
+    width: 100%;
+  }
+
+  .bottom-section {
+    margin-top: 40px;
+  }
+
+  .footer-section {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .footer-section a img {
+    width: 28px;
+    height: 28px;
+  }}
