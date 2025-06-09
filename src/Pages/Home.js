@@ -1,10 +1,13 @@
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // 🔹 Import useNavigate
 import ProductDetail from '../Pages/ProductDetail';
 import '../Pages/style.css';
 
-import Image1 from '../Images/home1.jpg';
-import Image2 from '../Images/home2.jpg';
+// import heroVideo from '../Images/home1.jpg'; // adjust the path based on your folder structure
+import Image1 from '../Images/home2.jpg';
+import Image2 from '../Images/home1.jpg';
 import Image3 from '../Images/home3.jpg';
 import Image4 from '../Images/home4.jpg';
 import WhatsNewImage from '../Images/doctor.jpg'; // 🔹 Import the "What's New" image
@@ -16,7 +19,7 @@ import Product1 from '../Images/BPL MULTIPARA MONITOR.png';
 import Product2 from '../Images/pulse oximeter.png';
 import Product3 from '../Images/syringe infusion pump.png';
 import Product4 from '../Images/baby warmer.png';
-import Product5 from '../Images/defibrillator.png';
+import Product5 from '../Images/defibrillator.jpeg';
 
 
 const Home = () => {
@@ -24,7 +27,7 @@ const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate(); // 🔹 Initialize navigate
 
-   const products = [
+  const products = [
     {
       id: 1,
       name: 'Defibrillator',
@@ -57,7 +60,7 @@ const Home = () => {
       description: 'Multipara monitor with advanced features...',
     }
   ];
- const handleImageClick = (clickedImg) => {
+  const handleImageClick = (clickedImg) => {
     const index = ProductDetail.findIndex(p => p.image === clickedImg);
     if (index !== -1) {
       navigate(`/products:id/${index}`);
@@ -66,31 +69,53 @@ const Home = () => {
   };
 
   useEffect(() => {
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [images.length]);
-
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false, });
+  }, []);
   // Click handler to navigate to ProductDetail with product data
   const handleProductClick = (product) => {
     navigate('/productdetail', { state: { product } });
   };
-  
 
-  const headerStyle = {
-    width: '100%',
-    height: '100vh',
+  // const videoStyle = {
+  //   position: 'absolute',
+  //   top: 110,
+  //   left: 0,
+  //   width: '100%',
+  //   height: '50%',
+  //   objectFit: 'cover',
+  //   opacity: 0.5, // transparent effect
+  //   zIndex: 1
+  // };
+
+   const headerStyle = {
     position: 'relative',
-    overflow: 'hidden'
+    width: '100%',
+    height: '90vh',
+    // backgroundColor: '#003366', // Navy Blue
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
   };
 
-  const imageStyle = {
+    const imageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'fill',
-    transition: 'opacity 1s ease-in-out'
+    objectFit: 'cover',
+    opacity: 0.9, // This makes image 40% visible (adjust as needed)
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
   };
+
 
   const indicatorWrapperStyle = {
     position: 'absolute',
@@ -113,10 +138,11 @@ const Home = () => {
 
   const overlayTextStyle = {
     position: 'absolute',
-    top: '60%',
-    left: '5%',
+    zIndex: 2, // Must be higher than the image
+    top: '30%',
+    left: '10%',
     transform: 'translateY(-50%)',
-    color: '#FF8b28',
+    color: 'navy blue',
     fontSize: '2.5rem',
     fontWeight: 'bold',
     zIndex: 2
@@ -147,13 +173,13 @@ const Home = () => {
   const overlayBottomCenterTextStyle = {
     position: 'absolute',
     bottom: '10%',
-    left: '50%',
+    right: '-20%', // Position text near the right edge
     transform: 'translateX(-50%)',
     color: '#000',
     fontSize: '2.2rem',
     fontWeight: 'bold',
     zIndex: 2,
-    textAlign: 'center'
+    textAlign: 'right'
   };
 
   const learnMoreButtonStyle = {
@@ -175,8 +201,41 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div style={headerStyle}>
+    // <div style={{ position: 'relative', minHeight: '100vh' }}>
+    //   <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+    //     {/* <video
+    //       src={heroVideo}
+    //       autoPlay
+    //       loop
+    //       muted
+    //       playsInline
+    //       style={{
+    //         width: '100%',
+    //         height: '100%',
+    //         objectFit: 'cover',
+    //         opacity: 0.5, // transparent effect
+    //         backgroundColor: '#003366',
+
+    //         mixBlendMode: 'screen', // removes green when blended with dark blue
+
+    //       }} */}
+    //     />
+    //   </div>
+
+    // Your overlay text/buttons here if needed
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
+
+      <div style={{
+        position: 'absolute',
+        top: '40%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        color: 'white',
+        fontSize: '2rem',
+        zIndex: 2,
+      }}>
+      </div> 
+       <div style={headerStyle}>
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
@@ -195,7 +254,7 @@ const Home = () => {
         )}
         {currentIndex === 2 && (
           <div style={overlayTopLeftTextStyle}>
-            Advanced Medical Devices You Can Trust
+            {/* Advanced Medical Devices You Can Trust */}
           </div>
         )}
         {currentIndex === 3 && (
@@ -217,10 +276,10 @@ const Home = () => {
             />
           ))}
         </div>
-      </div>
+      </div> 
 
       {/* Products Section */}
-      <div style={{ padding: '40px 5%', textAlign: 'left' }}>
+      <div style={{ padding: '40px 5%', textAlign: 'left' }} data-aos="fade-up">
         <div style={{
           width: '60px',
           height: '6px',
@@ -260,46 +319,51 @@ const Home = () => {
         >
           Explore More
         </button>
-         {/* Replace your product image map with this: */}
-      <div style={{
-        marginLeft: '625px',
-        marginTop: '-300px',
-        flex: '1 1 45%',
-        paddingTop: '10px',
-        padding: '10px',
-        overflowX: 'auto',
-        whiteSpace: 'nowrap',
-        display: 'flex',
-        gap: '20px',
-        scrollSnapType: 'x mandatory',
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none'
-      }}>
-        {products.map((product) => (
+        {/* Replace your product image map with this: */}
+        <div style={{
+          marginLeft: '625px',
+          marginTop: '-300px',
+          flex: '1 1 45%',
+          paddingTop: '10px',
+          padding: '10px',
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          display: 'flex',
+          gap: '20px',
+          scrollSnapType: 'x mandatory',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}>
+          {products.map((product) => (
+            <img
+              data-aos="fade-right"
+              data-aos-duration="1000"
+              key={product.id}
+              src={product.image}
+              alt={product.name}
+              onClick={() => handleProductClick(product)}
+              style={{
+                width: '300px',
+                height: '300px',
+                flex: '0 0 auto',
+                borderRadius: '10px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                scrollSnapAlign: 'start',
+                cursor: 'pointer',
+              }}
+            />
+          ))}
+        </div>
+
+
+
+
+
+        <div
+          style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
           <img
-            key={product.id}
-            src={product.image}
-            alt={product.name}
-            onClick={() => handleProductClick(product)}
-            style={{
-              width: '300px',
-              height: '300px',
-              flex: '0 0 auto',
-              borderRadius: '10px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              scrollSnapAlign: 'start',
-              cursor: 'pointer',
-            }}
-          />
-        ))}
-      </div>
-
-
-
-
-
-        <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
-          <img
+            data-aos="fade-right"
+            data-aos-duration="1000"
             src={WhatsNewImage}
             alt="What's New"
             style={{ width: '38%', borderRadius: '10px' }}
@@ -317,6 +381,7 @@ const Home = () => {
             }}>
               {/* ECG */}
               <div
+
                 style={{
                   fontSize: '1.5rem',
                   color: '#001F54',
@@ -326,7 +391,7 @@ const Home = () => {
                   alignItems: 'center',
                   marginBottom: '10px'
                 }}
-                onClick={() => navigate('/product')}
+                onClick={() => navigate('/products/ecg')}
                 onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                 onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
               >
@@ -338,6 +403,7 @@ const Home = () => {
 
               {/* UCG */}
               <div
+
                 style={{
                   fontSize: '1.5rem',
                   color: '#001F54',
@@ -347,14 +413,14 @@ const Home = () => {
                   alignItems: 'center',
                   marginTop: '20px'
                 }}
-                onClick={() => navigate('/product')}
+                onClick={() => navigate('/products/ucg')}
                 onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                 onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
               >
-                ➜ UCG (Ultrasound cardiography)
+                ➜ USG (Ultrasound Sonography)
               </div>
               <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.0' }}>
-                Our UCG machines provide real-time imaging and precise cardiac monitoring to assist clinicians in accurate diagnoses.
+                Our USG machines provide real-time imaging and precise cardiac monitoring to assist clinicians in accurate diagnoses.
               </p>
 
               {/* Multipara Monitor */}
@@ -368,11 +434,11 @@ const Home = () => {
                   alignItems: 'center',
                   marginTop: '20px'
                 }}
-                onClick={() => navigate('/product')}
+                onClick={() => navigate('/products/multiparamonitor')}
                 onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
                 onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
               >
-                ➜ Multipara Monitor (High end)
+                ➜ Multipara Monitor (High end/Low end)
               </div>
               <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.6' }}>
                 Our Multipara Monitors combine precision and ease of use, offering real-time tracking of vital signs including ECG, SPO2, NIBP, and temperature, designed for both ICU and mobile applications.
@@ -385,15 +451,17 @@ const Home = () => {
 
 
         {/* About Us Section */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '40px',
-          padding: '40px 1%',
-          flexWrap: 'wrap'
-        }}>
+        <div
+
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '40px',
+            padding: '40px 1%',
+            flexWrap: 'wrap'
+          }}>
           {/* Text on the Left */}
           <div style={{ flex: 1, minWidth: '300px' }}>
             <div style={{
@@ -413,12 +481,15 @@ const Home = () => {
               About Us
             </h2>
 
-            <p style={{
-              fontSize: '1.5rem',
-              color: '#555',
-              lineHeight: '1.5',
-              fontWeight: 'normal'
-            }}>
+            <p
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              style={{
+                fontSize: '1.5rem',
+                color: '#555',
+                lineHeight: '1.5',
+                fontWeight: 'normal'
+              }}>
               At Mindron Meditech, we are committed to enhancing healthcare outcomes through innovation and excellence.
               Our team of experts is dedicated to delivering reliable, cutting-edge medical devices that healthcare professionals trust.
               We prioritize patient safety, product quality, and regulatory compliance in everything we do.
@@ -453,6 +524,8 @@ const Home = () => {
 
           {/* Image on the Right */}
           <img
+            data-aos="fade-left"
+            data-aos-duration="1000"
             src={require('../Images/aboutushome.jpg')}
             alt="About Us"
             style={{
@@ -483,15 +556,13 @@ const Home = () => {
                 title: 'Products',
                 items: [
                   'ECG (Electrocardiograph)',
-                  'BPL Monitor',
-                  'Pathology',
-                  'Defibrillator',
-                  'Syringe Infusion Pump',
-                  'Volumetric Infusion Pump',
-                  'Baby Warmer',
-                  'Suction Machine',
-                  'Pulse Oximeter',
-                  'Echo Ultrasound']
+                  'Multipara Monitor',
+                  'Cardiotocography',
+                  'Auto Hematology Analyzer',
+                  'Magnetic Resonance Pancreatography',
+                  'Portable Ultrasound Machine '
+
+                ]
               },
               {
                 title: 'Solutions',
@@ -532,18 +603,53 @@ const Home = () => {
                       style={{
                         marginBottom: '10px',
                         color: '#ffffff',
+
                         cursor:
                           item === 'Contact Us' ||
                             item === 'Join Us' ||
                             item === 'Purpose' ||
                             item === 'Perspective' ||
                             item === 'Our Business' ||
-                            item === 'Business'
+                            item === 'Business' ||
+                            item === 'ECG (Electrocardiograph)' ||
+                            item==='Multipara Monitor'||
+                            item === 'Cardiotocography' ||
+                            item === 'Auto Hematology Analyzer' ||
+                            item === 'Magnetic Resonance Pancreatography' ||
+                            item === 'Portable Ultrasound Machine '
+                            // item === 'Volumetric Infusion Pump' ||
+                            // item === 'Baby Warmer' ||
+                            // item === 'Suction Machine' ||
+                            // item === 'Pulse Oximeter' ||
+                            // item === 'Echo Ultrasound'
                             ? 'pointer'
                             : 'default'
                       }}
                       onClick={() => {
-                        if (item === 'Contact Us' || item === 'Join Us') {
+
+                        const productMap = {
+                          'ECG (Electrocardiograph)': '/products/ecg',
+                          'Multipara Monitor':'/products/multiparamonitor',
+                          'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
+                          'Cardiotocography':'/products/cardiotocography',
+                          'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
+                          'Magnetic Resonance Pancreatography':'/products/mrp',
+                          'Portable Ultrasound Machine':'/products/portableultrasoundmachine',
+
+                          // 'BPL Monitor': '/products/bplmonitor',
+                          // 'Pathology': '/products/pathology',
+                          // 'Defibrillator': '/products/defibrillator',
+                          // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
+                          // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
+                          // 'Baby Warmer': '/products/babywarmer',
+                          // 'Suction Machine': '/products/suctionmachine',
+                          // 'Pulse Oximeter': '/products/pulseoximeter',
+                          // 'Echo Ultrasound': '/products/ecoultrasound',
+                        };
+                        if (productMap[item]) {
+                          navigate(`${productMap[item]}`);
+                        }
+                        else if (item === 'Contact Us' || item === 'Join Us') {
                           navigate('/contact');
                           window.scrollTo({ top: 600, behavior: 'smooth' });
                         } else if (
@@ -580,7 +686,7 @@ const Home = () => {
           flexWrap: 'wrap',
           fontSize: '16px',
           width: '111.5%',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}>
           {/* Left Side */}
           <div style={{ flex: '1', minWidth: '300px', lineHeight: '1.8' }}>
@@ -613,7 +719,7 @@ const Home = () => {
 
 
       </div>
-    </div>
+    </div >
   );
 };
 

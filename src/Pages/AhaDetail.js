@@ -7,7 +7,7 @@ import ahaMain from '../Images/AHA.jpeg';
 
 const AhaDetail = () => {
   return (
-    <div style={{ padding: '40px' }}>
+    <div style={{ padding: '80px' }}>
       <h1>Auto Hematology Analyzer – Model: AHA-X5</h1>
 
       {/* Image and Details Side-by-Side */}

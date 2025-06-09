@@ -1,4 +1,6 @@
-import React from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../Pages/style.css';
 
@@ -18,48 +20,50 @@ const
     const navigate = useNavigate(); // Initialize navigate
 
     const handleSubmit = async (e) => {
-  e.preventDefault();
+      e.preventDefault();
 
-  const data = {
-    firstName: e.target.firstName.value,
-    lastName: e.target.lastName.value,
-    email: e.target.email.value,
-    phone: e.target.phone.value,
-    message: e.target.message.value
-  };
+      const data = {
+        firstName: e.target.firstName.value,
+        lastName: e.target.lastName.value,
+        email: e.target.email.value,
+        phone: e.target.phone.value,
+        message: e.target.message.value
+      };
 
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-    const text = await res.text(); // to see raw response
-    console.log('Server response:', text);
+        const text = await res.text(); // to see raw response
+        console.log('Server response:', text);
 
-    // Try parsing only if it's valid JSON
-    try {
-      const json = JSON.parse(text);
-      if (json.success) {
-        alert('✅ Message sent successfully!');
-        e.target.reset();
-      } else {
-        alert(`❌ Error: ${json.error || 'Unknown error'}`);
+        // Try parsing only if it's valid JSON
+        try {
+          const json = JSON.parse(text);
+          if (json.success) {
+            alert('✅ Message sent successfully!');
+            e.target.reset();
+          } else {
+            alert(`❌ Error: ${json.error || 'Unknown error'}`);
+          }
+        } catch (parseErr) {
+          console.error('JSON parse error:', parseErr);
+          alert('❌ Unexpected server response');
+        }
+
+      } catch (err) {
+        console.error('Submit error:', err);
+        alert("❌ Something went wrong while submitting the form.");
       }
-    } catch (parseErr) {
-      console.error('JSON parse error:', parseErr);
-      alert('❌ Unexpected server response');
-    }
+    };
 
-  } catch (err) {
-    console.error('Submit error:', err);
-    alert("❌ Something went wrong while submitting the form.");
-  }
-};
+    useEffect(() => {
+      AOS.init({ duration: 1000, once: false });
+    }, []);
 
-        
-    
     const scrollToTop = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -77,7 +81,7 @@ const
     const imageStyle = {
       width: '100%',
       height: '100%',
-      objectFit: 'cover',
+  objectfit: 'contain',
       borderRadius: '8px',
       position: 'absolute',
       bottom: '0', // Make the bottom aligned with the container's bottom
@@ -236,7 +240,7 @@ const
         {/* Top Banner */}
         <div style={containerStyle}>
           <img src={ContactImage} alt="Contact" style={imageStyle} />
-          <div style={textOverlayStyle}>ADVANCED SOLUTION FOR EVERY NEED</div>
+          {/* <div style={textOverlayStyle}>ADVANCED SOLUTION FOR EVERY NEED</div>
           <div style={secondTextOverlayStyle}>DELIVERING CARE WITH TRUST AND SPEED</div>
           <div style={{ ...textOverlayStyle, top: '140px', left: '40%' }}>
             TAILORED SOLUTIONS FOR EVERY MEDICAL SPECIALTY
@@ -244,7 +248,7 @@ const
           </div>
           <div style={{ ...secondTextOverlayStyle, top: '200px', left: '45%' }}>
             DESIGNED WITH SAFETY AND COMPLIANCE IN MIND
-          </div>
+          </div> */}
           {/* Know More Button */}
           <button
             style={knowMoreButtonStyle}
@@ -261,22 +265,32 @@ const
         <div style={contactSectionStyle}>
           <div style={contactDetailsStyle}>
             <div style={contactDetailStyle}>
-              <img src={PhoneIcon} alt="Phone" style={iconStyle} />
-              <div>+91 80565 63493</div>
+              <img
+                data-aos="fade-right"
+                data-aos-duration="1000" src={PhoneIcon} alt="Phone" style={iconStyle} />
+              <div
+                data-aos="fade-right"
+                data-aos-duration="1000">+91 80565 63493</div>
             </div>
             <div style={contactDetailStyle}>
-              <img src={EmailIcon} alt="Email" style={iconStyle} />
-              <div>info@mindronmeditech.com</div>
+              <img data-aos="fade-right"
+                data-aos-duration="1000" src={EmailIcon} alt="Email" style={iconStyle} />
+              <div data-aos="fade-right"
+                data-aos-duration="1000">info@mindronmeditech.com</div>
             </div>
             <div style={contactDetailStyle}>
-              <img src={AddressIcon} alt="Address" style={iconStyle} />
-              <div>
+              <img data-aos="fade-right"
+                data-aos-duration="1000" src={AddressIcon} alt="Address" style={iconStyle} />
+              <div data-aos="fade-right"
+                data-aos-duration="1000">
                 Mindron Meditech Private Limited, D 218, Mumbai - Agra Road,<br />
                 Industrial Estate, Amrut Nagar, Behind R City Mall,<br />
                 Ghatkopar West, Mumbai, Maharashtra 400086
               </div>
             </div>
-            <div style={{ position: 'relative', marginTop: '20px', marginLeft: '100px', width: '50%', height: '350px' }}>
+            <div data-aos="fade-left"
+              data-aos-duration="1000"
+              style={{ position: 'relative', marginTop: '20px', marginLeft: '100px', width: '50%', height: '350px' }}>
               <iframe
                 title="Mindron Meditech Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.126400966925!2d72.9114937749781!3d19.10210998210786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c782963cbc57%3A0xe3a4a8bd76446b13!2sMindron%20Meditech%20Private%20limited!5e0!3m2!1sen!2sin!4v1747806779929!5m2!1sen!2sin"
@@ -380,17 +394,20 @@ const
 
         {/* Get in Touch Section */}
         <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <h3 style={{ fontSize: '30px', fontWeight: 'bold', color: '#000' }}>📞 Get in Touch</h3>
-          <p style={{
-            fontSize: '24px',
-            color: '#333',
-            maxWidth: '600px',
-            margin: 'auto',
-            whiteSpace: 'pre',
-            fontFamily: 'inherit',
-            lineHeight: '1.6',
-            marginLeft: '280px',
-          }}>
+          <h3 style={{ fontSize: '30px', fontWeight: 'bold', color: '#000' }}data-aos="fade-top"
+            data-aos-duration="1000">📞 Get in Touch</h3>
+          <p
+            data-aos="fade-top"
+            data-aos-duration="1000" style={{
+              fontSize: '24px',
+              color: '#333',
+              maxWidth: '600px',
+              margin: 'auto',
+              whiteSpace: 'pre',
+              fontFamily: 'inherit',
+              lineHeight: '1.6',
+              marginLeft: '280px',
+            }}>
             {`We’d love to hear from you! Whether you have a question, feedback, or just want to say hello,
                               feel free to reach out to us. Your message is important,
                                   and we will get back to you as soon as possible.`}
@@ -451,15 +468,11 @@ const
                 title: 'Products',
                 items: [
                   'ECG (Electrocardiograph)',
-                  'BPL Monitor',
-                  'Pathology',
-                  'Defibrillator',
-                  'Syringe Infusion Pump',
-                  'Volumetric Infusion Pump',
-                  'Baby Warmer',
-                  'Suction Machine',
-                  'Pulse Oximeter',
-                  'Echo Ultrasound']
+                'Multipara Monitor',
+              'Cardiotocography',
+                  'Auto Hematology Analyzer',
+                  'Magnetic Resonance Pancreatography',
+                  'Portable Ultrasound Machine ']
               },
               {
                 title: 'Solutions',
@@ -506,12 +519,50 @@ const
                             item === 'Purpose' ||
                             item === 'Perspective' ||
                             item === 'Our Business' ||
-                            item === 'Business'
+                            item === 'Business' ||
+                            item === 'ECG (Electrocardiograph)' ||
+                            item==='Multipara Monitor'||
+                            item === 'Cardiotocography' ||
+                            item === 'Auto Hematology Analyzer' ||
+                            item === 'Magnetic Resonance Pancreatography' ||
+                            item === 'Portable Ultrasound Machine '
+                            // item === 'ECG (Electrocardiograph)' ||
+                            // item === 'BPL Monitor' ||
+                            // item === 'Pathology' ||
+                            // item === 'Defibrillator' ||
+                            // item === 'Syringe Infusion Pump' ||
+                            // item === 'Volumetric Infusion Pump' ||
+                            // item === 'Baby Warmer' ||
+                            // item === 'Suction Machine' ||
+                            // item === 'Pulse Oximeter' ||
+                            // item === 'Echo Ultrasound'
                             ? 'pointer'
                             : 'default'
                       }}
                       onClick={() => {
-                        if (item === 'Contact Us' || item === 'Join Us') {
+                        const productMap = {
+                          'ECG (Electrocardiograph)': '/products/ecg',
+                          'Multipara Monitor':'/products/multiparamonitor',
+                          'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
+                          'Cardiotocography':'/products/cardiotocography',
+                          'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
+                          'Magnetic Resonance Pancreatography':'/products/mrp',
+                          'Portable Ultrasound Machine':'/products/portableultrasoundmachine',
+                          // 'ECG (Electrocardiograph)': '/products/ecg',
+                          // 'BPL Monitor': '/products/bplmonitor',
+                          // 'Pathology': '/products/pathology',
+                          // 'Defibrillator': '/products/defibrillator',
+                          // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
+                          // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
+                          // 'Baby Warmer': '/products/babywarmer',
+                          // 'Suction Machine': '/products/suctionmachine',
+                          // 'Pulse Oximeter': '/products/pulseoximeter',
+                          // 'Echo Ultrasound': '/products/ecoultrasound',
+                        };
+                        if (productMap[item]) {
+                          navigate(`${productMap[item]}`);
+                        }
+                        else if (item === 'Contact Us' || item === 'Join Us') {
                           navigate('/contact');
                           window.scrollTo({ top: 600, behavior: 'smooth' });
                         } else if (

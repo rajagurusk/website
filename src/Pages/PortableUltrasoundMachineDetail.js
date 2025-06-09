@@ -1,57 +1,146 @@
-// src/Pages/PortableUltrasoundMachineDetail.js
-import React from 'react';
+import React, { useState } from 'react';
 import ultrasoundMain from '../Images/Portable Ultrasound Machine.jpeg';
-// import us1 from '../Images/us1.jpeg';
-// import us2 from '../Images/us2.jpeg';
-// import us3 from '../Images/us3.jpeg'; // Add more if needed
+// import ultrasoundAlt from '../Images/us2.jpeg'; // Add your second product image here
+
+const imageDetails = {
+  [ultrasoundMain]: {
+    heading: ' Ultrasound Scanning Machine (Portable Series)',
+    title: 'Model - MM CD 200',
+    description:
+      'The MM CD 200 is designed for easy mobility while delivering high-resolution ultrasound imaging across a range of clinical settings.',
+    sections: {
+      Feature: [
+        'High-frequency transducer compatibility',
+        'Lightweight and battery-operated',
+        'Color Doppler imaging support',
+        'Ideal for emergency and bedside use',
+      ],
+      'Technical Specification': [
+        'Imaging Modes: B, M, Color Doppler',
+        'Display: 12" LED',
+        'Battery Life: 4+ hours',
+      ],
+      'Optional Accessories': [
+        'Carrying case',
+        'External probe options',
+      ],
+    },
+  },
+  // [ultrasoundAlt]: {
+  //   heading: 'Portable Ultrasound Machine',
+  //   title: 'Model - MM CD 300',
+  //   description:
+  //     'A compact ultrasound solution with advanced imaging modes, perfect for rural and critical care environments.',
+  //   sections: {
+  //     Feature: [
+  //       'Touchscreen interface',
+  //       'Wireless image sharing',
+  //       'Dual probe support',
+  //       'Rechargeable battery',
+  //     ],
+  //     'Technical Specification': [
+  //       'Transducer Frequency: 2.5 - 10 MHz',
+  //       'Display: 10.1" HD',
+  //       'Battery Life: 6 hours',
+  //     ],
+  //     'Optional Accessories': [
+  //       'Vehicle charger',
+  //       'Wall mounting kit',
+  //     ],
+  //   },
+  // },
+};
 
 const PortableUltrasoundMachineDetail = () => {
-  return (
-    <div style={{ padding: '40px' }}>
-      <h1>
-        Portable Ultrasound Machine <br />
-        Model - MM CD 200
-      </h1>
+  const allImages = [ultrasoundMain];//, ultrasoundAlt
+  const [mainImage, setMainImage] = useState(ultrasoundMain);
+  const [relatedImages, setRelatedImages] = useState(allImages.filter((img) => img !== ultrasoundMain));
+  const [activeSection, setActiveSection] = useState('Feature');
 
-      {/* Image and Details Side-by-Side */}
+  const handleImageClick = (clickedImage) => {
+    setMainImage(clickedImage);
+    setRelatedImages(allImages.filter((img) => img !== clickedImage));
+    setActiveSection('Feature'); // reset on change
+  };
+
+  return (
+    <div style={{ padding: '80px' }}>
+      <h1>{imageDetails[mainImage]?.heading}</h1>
+
       <div style={{ display: 'flex', marginTop: '30px', gap: '30px', flexWrap: 'wrap' }}>
-        {/* Left: Image */}
+        {/* Image */}
         <div style={{ flex: '1', minWidth: '300px' }}>
           <img
-            src={ultrasoundMain}
-            alt="Ultrasound Machine"
-            style={{ maxWidth: '300px', width: '100%', borderRadius: '10px', marginLeft: '150px' }}
+            src={mainImage}
+            alt="Ultrasound"
+            style={{
+              maxWidth: '350px',
+              width: '100%',
+              borderRadius: '10px',
+              marginLeft: '120px',
+            }}
           />
         </div>
 
-        {/* Right: Details */}
+        {/* Details */}
         <div style={{ flex: '1', minWidth: '300px' }}>
-          <h2>Efficient & Portable Imaging Solution</h2>
-          <p>
-            The MM CD 200 is designed for easy mobility while delivering high-resolution ultrasound imaging across a range of clinical settings.
-          </p>
+          <h2>{imageDetails[mainImage]?.title}</h2>
+          <p>{imageDetails[mainImage]?.description}</p>
+
+          {/* Section Tabs */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '15px' }}>
+            {Object.keys(imageDetails[mainImage]?.sections || {}).map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: activeSection === section ? '2px solid #007BFF' : '1px solid #ccc',
+                  backgroundColor: activeSection === section ? '#e6f0ff' : '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                {section}
+              </button>
+            ))}
+          </div>
+
+          {/* Section Content */}
           <ul>
-            <li>High-frequency transducer compatibility</li>
-            <li>Lightweight and battery-operated</li>
-            <li>Color Doppler imaging support</li>
-            <li>Ideal for emergency and bedside use</li>
+            {(imageDetails[mainImage]?.sections?.[activeSection] || []).map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
 
-      {/* Related Images Section */}
+      {/* Related Products */}
       <div style={{ marginTop: '50px' }}>
-        <h3>Related Images</h3>
-        <div style={{
-          display: 'flex',
-          gap: '20px',
-          marginTop: '20px',
-          overflowX: 'auto',
-          paddingBottom: '10px'
-        }}>
-          {/* <img src={us1} alt="Ultrasound View 1" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={us2} alt="Ultrasound View 2" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={us3} alt="Ultrasound in Use" style={{ width: '200px', borderRadius: '8px' }} /> */}
+        <h3>Related Products</h3>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+            overflowX: 'auto',
+            paddingBottom: '10px',
+          }}
+        >
+          {relatedImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Related ${index}`}
+              style={{
+                width: '200px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                border: '2px solid #ccc',
+              }}
+              onClick={() => handleImageClick(img)}
+            />
+          ))}
         </div>
       </div>
     </div>

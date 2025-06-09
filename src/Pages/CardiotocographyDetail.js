@@ -1,54 +1,68 @@
 // src/Pages/CardiotocographyDetail.js
-import React from 'react';
+import React, { useState } from 'react';
 import ctgMain from '../Images/ctg.jpeg';
-// import ctg1 from '../Images/ctg-1.jpeg';
-// import ctg2 from '../Images/ctg-2.jpeg';
-// import ctg3 from '../Images/ctg-3.jpeg'; // Add more if needed
+
+const imageDetails = {
+  [ctgMain]: {
+    heading: 'Cardiotocography',
+    title: 'Model: CTG Pro 200',
+    description:
+      'The CTG Pro 200 is a state-of-the-art fetal monitoring device that offers real-time insights into fetal heart rate and uterine contractions.',
+    sections: {
+      Features: [
+        'High-precision dual-probe system',
+        'Large TFT display with touch controls',
+        'Long battery life with portable design',
+        'Automatic printout and data storage',
+      ],
+    },
+  },
+};
 
 const CardiotocographyDetail = () => {
-  return (
-    <div style={{ padding: '40px' }}>
-      <h1>Cardiotocography – Model: CTG Pro 200</h1>
+  const [activeSection, setActiveSection] = useState('Features');
 
-      {/* Image and Details Side-by-Side */}
+  return (
+    <div style={{ padding: '90px' }}>
+      <h1>{imageDetails[ctgMain].heading} </h1> 
+      {/* – {imageDetails[ctgMain].title */}
       <div style={{ display: 'flex', marginTop: '30px', gap: '30px', flexWrap: 'wrap' }}>
-        {/* Left: Image */}
         <div style={{ flex: '1', minWidth: '300px' }}>
           <img
             src={ctgMain}
-            alt="Cardiotocography Device"
+            alt="CTG Device"
             style={{ maxWidth: '300px', width: '100%', borderRadius: '10px', marginLeft: '150px' }}
           />
         </div>
 
-        {/* Right: Details */}
         <div style={{ flex: '1', minWidth: '300px' }}>
-          <h2>Precise Fetal Monitoring</h2>
-          <p>
-            The CTG Pro 200 is a state-of-the-art fetal monitoring device that offers real-time insights into fetal heart rate and uterine contractions.
-          </p>
-          <ul>
-            <li>High-precision dual-probe system</li>
-            <li>Large TFT display with touch controls</li>
-            <li>Long battery life with portable design</li>
-            <li>Automatic printout and data storage</li>
-          </ul>
-        </div>
-      </div>
+          <h2>{imageDetails[ctgMain].title}</h2>
+          <p>{imageDetails[ctgMain].description}</p>
 
-      {/* Related Images Section */}
-      <div style={{ marginTop: '50px' }}>
-        <h3>Related Images</h3>
-        <div style={{
-          display: 'flex',
-          gap: '20px',
-          marginTop: '20px',
-          overflowX: 'auto',
-          paddingBottom: '10px'
-        }}>
-          {/* <img src={ctg1} alt="CTG View 1" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={ctg2} alt="CTG View 2" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={ctg3} alt="CTG in Use" style={{ width: '200px', borderRadius: '8px' }} /> */}
+          {/* Section Tabs */}
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+            {Object.keys(imageDetails[ctgMain].sections).map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: activeSection === section ? '2px solid #007BFF' : '1px solid #ccc',
+                  backgroundColor: activeSection === section ? '#e6f0ff' : '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                {section}
+              </button>
+            ))}
+          </div>
+
+          <ul>
+            {imageDetails[ctgMain].sections[activeSection]?.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

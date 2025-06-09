@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Pages/style.css';
 import AboutBanner from '../Images/aboutus.jpg';
@@ -10,13 +12,18 @@ import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
 import InstagramIcon from '../Images/instagram.png';
 
+
 const About = () => {
   const navigate = useNavigate();
 
-//   const handleProductClick = (productName) => {
-//   navigate('/products/:id', { state: { productName } });
-// };
-  
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+  }, []);
+
+  //   const handleProductClick = (productName) => {
+  //   navigate('/products/:id', { state: { productName } });
+  // };
+
   const purposeRef = useRef(null);
   const perspectiveRef = useRef(null);
   const businessRef = useRef(null);
@@ -27,9 +34,17 @@ const About = () => {
   };
 
   const imageStyle = {
-    width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', position: 'absolute', bottom: '0', left: '0'
-  };
+      width: '100%',
+      height: '100%',
+  objectfit: 'contain',
+      opacity: 0.9, // This makes image 40% visible (adjust as needed)
+      borderRadius: '8px',
+      position: 'absolute',
+      bottom: '0', // Make the bottom aligned with the container's bottom
+      left: '0',
+          zIndex: 1,
 
+    };
   const textOverlayStyle = {
     position: 'absolute', top: '20px', right: '5%', color: '#000000', fontSize: '32px', fontWeight: 'bold', zIndex: 2, textAlign: 'right', lineHeight: '1.6'
   };
@@ -55,14 +70,14 @@ const About = () => {
       {/* Header Image Section */}
       <div style={containerStyle}>
         <img src={AboutBanner} alt="About Us" style={imageStyle} />
-        <div style={textOverlayStyle}>
+        {/* <div style={textOverlayStyle}>
           AT MINDRON MEDITECH, WE DELIVER ADVANCED MEDICAL <br />
           SOLUTIONS THAT REDEFINE CLINICAL EXCELLENCE.
         </div>
         <div style={secondTextOverlayStyle}>
           OUR MISSION IS CLEAR: TO SUPPORT CAREGIVERS <br />
           WITH RELIABLE TECHNOLOGY AND UNMATCHED SERVICE.
-        </div>
+        </div> */}
         <button style={buttonStyle} onClick={() => navigate('/contact')}>
           Contact Us
         </button>
@@ -97,9 +112,13 @@ const About = () => {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', marginTop: '24px', padding: '0 10%', flexWrap: 'wrap' }}>
-        <img src={PurposeImage} alt="Purpose Illustration" style={{ width: '30%', minWidth: '200px', borderRadius: '8px' }} />
+        <img data-aos="fade-top"
+          data-aos-duration="1000"
+          src={PurposeImage} alt="Purpose Illustration" style={{ width: '30%', minWidth: '200px', borderRadius: '8px' }} />
         <div style={{ flex: 1 }}>
-          <p style={{ fontSize: '28px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
+          <p data-aos="fade-left"
+            data-aos-duration="1000"
+            style={{ fontSize: '28px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
             <strong>At Mindron Meditech, our purpose</strong> is to empower healthcare professionals by
             delivering cutting-edge medical technologies. We believe that every innovation
             should be driven by real clinical needs and designed for maximum patient benefit.
@@ -114,13 +133,17 @@ const About = () => {
             <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
             <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Perspective</h2>
           </div>
-          <p style={{ fontSize: '24px', color: '#333', lineHeight: '1.8', maxWidth: '100%', fontWeight: '500', marginTop: '16px' }}>
+          <p data-aos="fade-right"
+            data-aos-duration="1000"
+            style={{ fontSize: '24px', color: '#333', lineHeight: '1.8', maxWidth: '100%', fontWeight: '500', marginTop: '16px' }}>
             Our perspective is rooted in a deep understanding of clinical challenges. We continuously
             evolve with the changing landscape of medical needs and technology to provide adaptive
             and forward-thinking solutions that improve lives.
           </p>
         </div>
-        <img src={PerspectiveImage} alt="Perspective Illustration" style={{ width: '40%', minWidth: '250px', borderRadius: '8px' }} />
+        <img data-aos="fade-top"
+          data-aos-duration="1000"
+          src={PerspectiveImage} alt="Perspective Illustration" style={{ width: '40%', minWidth: '250px', borderRadius: '8px' }} />
       </div>
 
       {/* Business Section */}
@@ -132,9 +155,13 @@ const About = () => {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', marginTop: '24px', padding: '0 10%', flexWrap: 'wrap' }}>
-        <img src={BusinessImage} alt="Business Illustration" style={{ width: '40%', minWidth: '200px', borderRadius: '8px' }} />
+        <img data-aos="fade-top"
+          data-aos-duration="1000"
+          src={BusinessImage} alt="Business Illustration" style={{ width: '40%', minWidth: '200px', borderRadius: '8px' }} />
         <div style={{ flex: 1 }}>
-          <p style={{ fontSize: '26px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
+          <p data-aos="fade-left"
+            data-aos-duration="1000"
+            style={{ fontSize: '26px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
             <strong>Our business strategy</strong> is grounded in innovation, trust, and long-term partnerships.
             At Mindron Meditech, we focus on scalable solutions that meet global healthcare demands
             while maintaining the highest standards of quality and regulatory compliance.
@@ -157,15 +184,11 @@ const About = () => {
               title: 'Products',
               items: [
                 'ECG (Electrocardiograph)',
-                'BPL Monitor',
-                'Pathology',
-                'Defibrillator',
-                'Syringe Infusion Pump',
-                'Volumetric Infusion Pump',
-                'Baby Warmer',
-                'Suction Machine',
-                'Pulse Oximeter',
-                'Echo Ultrasound'
+                'Multipara Monitor',
+              'Cardiotocography',
+                  'Auto Hematology Analyzer',
+                  'Magnetic Resonance Pancreatography',
+                  'Portable Ultrasound Machine '
               ]
 
             },
@@ -214,26 +237,49 @@ const About = () => {
                           item === 'Purpose' ||
                           item === 'Perspective' ||
                           item === 'Our Business' ||
-                          item === 'Business'
+                          item === 'Business' ||
+                          item === 'ECG (Electrocardiograph)' ||
+                            item==='Multipara Monitor'||
+                            item === 'Cardiotocography' ||
+                            item === 'Auto Hematology Analyzer' ||
+                            item === 'Magnetic Resonance Pancreatography' ||
+                            item === 'Portable Ultrasound Machine '
+                          // item === 'ECG (Electrocardiograph)' ||
+                          // item === 'BPL Monitor' ||
+                          // item === 'Pathology' ||
+                          // item === 'Defibrillator' ||
+                          // item === 'Syringe Infusion Pump' ||
+                          // item === 'Volumetric Infusion Pump' ||
+                          // item === 'Baby Warmer' ||
+                          // item === 'Suction Machine' ||
+                          // item === 'Pulse Oximeter' ||
+                          // item === 'Echo Ultrasound'
                           ? 'pointer'
                           : 'default'
                     }}
                     onClick={() => {
                       const productMap = {
-                        'ECG (Electrocardiograph)': 'ecg',
-                        'BPL Monitor': 'bpl-monitor',
-                        'Pathology': 'pathology',
-                        'Defibrillator': 'defibrillator',
-                        'Syringe Infusion Pump': 'syringe-infusion-pump',
-                        'Volumetric Infusion Pump': 'volumetric-infusion-pump',
-                        'Baby Warmer': 'baby-warmer',
-                        'Suction Machine': 'suction-machine',
-                        'Pulse Oximeter': 'pulse-oximeter',
-                        'Echo Ultrasound': 'echo-ultrasound'
+                        'ECG (Electrocardiograph)': '/products/ecg',
+                          'Multipara Monitor':'/products/multiparamonitor',
+                          'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
+                          'Cardiotocography':'/products/cardiotocography',
+                          'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
+                          'Magnetic Resonance Pancreatography':'/products/mrp',
+                          'Portable Ultrasound Machine':'/products/portableultrasoundmachine',
+                        // 'ECG (Electrocardiograph)': '/products/ecg',
+                        // 'BPL Monitor': '/products/bplmonitor',
+                        // 'Pathology': '/products/pathology',
+                        // 'Defibrillator': '/products/defibrillator',
+                        // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
+                        // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
+                        // 'Baby Warmer': '/products/babywarmer',
+                        // 'Suction Machine': '/products/suctionmachine',
+                        // 'Pulse Oximeter': '/products/pulseoximeter',
+                        // 'Echo Ultrasound': '/products/ecoultrasound',
                       };
 
                       if (productMap[item]) {
-                        navigate(`/productdetail/${productMap[item]}`);
+                        navigate(`${productMap[item]}`);
                       }
                       else if (item === 'Contact Us' || item === 'Join Us') {
                         navigate('/contact');
@@ -337,8 +383,8 @@ const About = () => {
             opacity: 1;
           }
         `
-        
-        
+
+
         }
       </style>
     </div>

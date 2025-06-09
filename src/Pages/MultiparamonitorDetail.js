@@ -1,57 +1,134 @@
-// src/Pages/MultiparamonitorDetail.js
-import React from 'react';
+import React, { useState } from 'react';
 import monitorMain from '../Images/multiparamonitor.jpeg';
-// import monitor1 from '../Images/monitor-1.jpg';
-// import monitor2 from '../Images/monitor-2.jpg';
-// import monitor3 from '../Images/monitor-3.jpg'; // Add more if needed
+import monitorAlt from '../Images/multilowend.jpeg'; // Add your second image here
+
+const imageDetails = {
+  [monitorMain]: {
+    heading: 'Multipara Monitor (High End) ',
+    title: 'Model: MT 70 Plus',
+    description:
+      'The MT 70 Plus Multipara Monitor is designed for high-precision, real-time monitoring of critical patient vitals, supporting better clinical decisions.',
+    sections: {
+      Features: [
+        'Large HD touchscreen display',
+        'ECG, SpO2, NIBP, RESP, and TEMP monitoring',
+        'Data storage and USB export',
+        'Battery backup for mobility',
+      ],
+      Specifications: [
+        'Screen Size: 12.1 inches',
+        'Battery Backup: 4 hours',
+        'Ports: USB, Ethernet',
+        'Mounting: Wall/Trolley Compatible',
+      ],
+    },
+  },
+  [monitorAlt]: {
+    heading: 'Multipara Monitor (Low End) ',
+    title: 'Model: MT 60 Eco',
+    description:
+      'The MT 60 Eco is an affordable and portable patient monitor designed for small clinics and home use.',
+    sections: {
+      Features: [
+        'Bright LED screen',
+        'SpO2 and NIBP only',
+        'Compact and lightweight',
+        'USB Charging',
+      ],
+      Specifications: [
+        'Screen Size: 8 inches',
+        'Battery Backup: 2 hours',
+        'Input: 100–240V AC',
+      ],
+    },
+  },
+};
 
 const MultiparamonitorDetail = () => {
-  return (
-    <div style={{ padding: '40px' }}>
-      <h1>Multipara Monitor — Model: MT 70 Plus</h1>
+  const allImages = [monitorMain, monitorAlt];
+  const [mainImage, setMainImage] = useState(monitorMain);
+  const [relatedImages, setRelatedImages] = useState(allImages.filter((img) => img !== monitorMain));
+  const [activeSection, setActiveSection] = useState('Features');
 
-      {/* Image and Details Side-by-Side */}
+  const handleImageClick = (clickedImage) => {
+    setMainImage(clickedImage);
+    setRelatedImages(allImages.filter((img) => img !== clickedImage));
+    setActiveSection('Features'); // reset to default section
+  };
+
+  return (
+    <div style={{ padding: '100px' }}>
+      <h1>{imageDetails[mainImage]?.heading}</h1>
+
       <div style={{ display: 'flex', marginTop: '30px', gap: '30px', flexWrap: 'wrap' }}>
         {/* Left: Image */}
         <div style={{ flex: '1', minWidth: '300px' }}>
           <img
-            src={monitorMain}
+            src={mainImage}
             alt="Multipara Monitor"
-            style={{ maxWidth: '300px', width: '100%', borderRadius: '10px',marginLeft: '120px' }}
+            style={{ maxWidth: '400px', width: '100%', borderRadius: '10px', marginLeft: '120px' }}
           />
         </div>
 
         {/* Right: Details */}
         <div style={{ flex: '1', minWidth: '300px' }}>
-          <h2>Comprehensive Patient Monitoring</h2>
-          <p>
-            The MT 70 Plus Multipara Monitor is designed for high-precision, real-time monitoring of critical patient vitals, supporting better clinical decisions.
-          </p>
+          <h2>{imageDetails[mainImage]?.title}</h2>
+          <p>{imageDetails[mainImage]?.description}</p>
+
+          {/* Tabs */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '15px' }}>
+            {Object.keys(imageDetails[mainImage]?.sections || {}).map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: activeSection === section ? '2px solid #007BFF' : '1px solid #ccc',
+                  backgroundColor: activeSection === section ? '#e6f0ff' : '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                {section}
+              </button>
+            ))}
+          </div>
+
+          {/* Section Content */}
           <ul>
-            <li>Large HD touchscreen display</li>
-            <li>ECG, SpO2, NIBP, RESP, and TEMP monitoring</li>
-            <li>Data storage and USB export</li>
-            <li>Battery backup for mobility</li>
+            {(imageDetails[mainImage]?.sections?.[activeSection] || []).map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
 
       {/* Related Images Section */}
       <div style={{ marginTop: '50px' }}>
-        <h3>Related Images</h3>
+        <h3>Related Products</h3>
         <div
           style={{
             display: 'flex',
             gap: '20px',
             marginTop: '20px',
             overflowX: 'auto',
-            paddingBottom: '10px'
+            paddingBottom: '10px',
           }}
         >
-          {/* <img src={monitor1} alt="Monitor View 1" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={monitor2} alt="Monitor View 2" style={{ width: '200px', borderRadius: '8px' }} />
-          <img src={monitor3} alt="Monitor in Use" style={{ width: '200px', borderRadius: '8px' }} /> */}
-          {/* Add more images as needed */}
+          {relatedImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Related ${index}`}
+              style={{
+                width: '200px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                border: '2px solid #ccc',
+              }}
+              onClick={() => handleImageClick(img)}
+            />
+          ))}
         </div>
       </div>
     </div>

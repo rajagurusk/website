@@ -42,7 +42,6 @@ function App() {
           <Route path="/products/multiparamonitor" element={<MultiparamonitorDetail />} />
           <Route path="/products/bplmonitor" element={<BplmonitorDetail />} />
           <Route path="/products/pathology" element={<PathologyDetail />} />
-          <Route path="/products/pathology" element={<PathologyDetail />} />
           <Route path="/products/defibrillator" element={<DefibrillatorDetail />} />
           <Route path="/products/syringeInfusionpump" element={<SyringeInfusionpumpDetail />} />
           <Route path="/products/volumericInfusionpump" element={<VolumericInfusionpumpDetail />} />
@@ -50,10 +49,10 @@ function App() {
           <Route path="/products/suctionmachine" element={<SuctionmachineDetail />} />
           <Route path="/products/pulseoximeter" element={<PulseoximeterDetail />} />
           <Route path="/products/ecoultrasound" element={<EcoultrasoundDetail />} />
-                    <Route path="/products/cardiotocography" element={<CardiotocographyDetail />} />
-                    <Route path="/products/autohematologyanalyzer" element={<AhaDetail />} />
-                                        <Route path="/products/mrp" element={<MrpDetail />} />
-                                        <Route path="/products/portableultrasoundmachine" element={<PortableUltrasoundMachineDetail />} />
+          <Route path="/products/cardiotocography" element={<CardiotocographyDetail />} />
+          <Route path="/products/autohematologyanalyzer" element={<AhaDetail />} />
+          <Route path="/products/mrp" element={<MrpDetail />} />
+          <Route path="/products/portableultrasoundmachine" element={<PortableUltrasoundMachineDetail />} />
 
 
 

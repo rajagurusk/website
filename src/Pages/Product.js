@@ -4,12 +4,12 @@ import { useNavigate,Link } from 'react-router-dom'; // 🔹 Import useNavigate
 import '../Pages/style.css';
 
 import ProductHeaderImage from '../Images/productpage.jpg'; // header
-import ECGImage from '../Images/ecg1.png';
+import ECGImage from '../Images/ecg1.jpeg';
 import UCGImage from '../Images/ucg1.png';
 import MultiParaImage from '../Images/multiparamonitor.jpeg';
 import BPLMULTIPARAMONITOR from '../Images/BPL MULTIPARA MONITOR.png';
 import Pathology from '../Images/pathology.png';
-import Defibrillator from '../Images/defibrillator.png';
+import Defibrillator from '../Images/defibrillator.jpeg';
 import SyringeInfusionPump from '../Images/syringe infusion pump.png';
 import VolumericInfusionPump from '../Images/volumeric infusion pump.png';
 // import WardBed from '../Images/ward bed.png';
@@ -32,24 +32,25 @@ import InstagramIcon from '../Images/instagram.png';
 
 
 const products = [
-  { name: 'ECG (Electrocardiograph)', img: ECGImage, path: '/products/ecg' },
-  { name: 'UCG (Ultrasound Cardiography)', img: UCGImage,path:'/products/ucg' },
-  { name: 'Multipara Monitor', img: MultiParaImage,path:'/products/multiparamonitor' },
-  { name: 'BPL Monitor', img: BPLMULTIPARAMONITOR ,path:'/products/bplmonitor'},
-  { name: 'Pathology', img: Pathology ,path:'/products/pathology'},
-  { name: 'Defibrillator', img: Defibrillator ,path:'/products/defibrillator'},
-  { name: 'Syringe Infusion Pump', img: SyringeInfusionPump,path:'/products/syringeInfusionpump' },
-  { name: 'Volumetric Infusion Pump', img: VolumericInfusionPump,path:'/products/volumericInfusionpump' },
-  // { name: 'Ward Bed', img: WardBed },
-  { name: 'Baby Warmer', img: BabyWarmer,path:'/products/babywarmer' },
-  { name: 'Suction Machine', img: SuctionMachine ,path:'/products/suctionmachine' },
-  { name: 'Pulse Oximeter', img: PulseOximeter,path:'/products/pulseoximeter' },
-  { name: 'Echo Ultrasound', img: EcoUltrasound ,path:'/products/ecoultrasound'},
+                  {name:'Color Dopplers & Ultrasound ',img:PortableUltrasoundMachine,path:'/products/portableultrasoundmachine'},
+  { name: 'ECG Machine', img: ECGImage, path: '/products/ecg' },
+  // { name: 'UCG (Ultrasound Cardiography)', img: UCGImage,path:'/products/ucg' },
+  { name: 'Multiparameter Monitor', img: MultiParaImage,path:'/products/multiparamonitor' },
+  // { name: 'BPL Monitor', img: BPLMULTIPARAMONITOR ,path:'/products/bplmonitor'},
+  // { name: 'Pathology', img: Pathology ,path:'/products/pathology'},
+  // { name: 'Syringe Infusion Pump', img: SyringeInfusionPump,path:'/products/syringeInfusionpump' },
+  // { name: 'Volumetric Infusion Pump', img: VolumericInfusionPump,path:'/products/volumericInfusionpump' },
+  // // { name: 'Ward Bed', img: WardBed },
+  // { name: 'Baby Warmer', img: BabyWarmer,path:'/products/babywarmer' },
+  // { name: 'Suction Machine', img: SuctionMachine ,path:'/products/suctionmachine' },
+  // { name: 'Pulse Oximeter', img: PulseOximeter,path:'/products/pulseoximeter' },
+  // { name: 'Echo Ultrasound', img: EcoUltrasound ,path:'/products/ecoultrasound'},
   // { name: 'OT Table', img: OTTable },
   {name:'Cardiotocography',img:Cardiotocography,path:'/products/cardiotocography'} ,
     {name:'Auto Hematology Analyzer',img:AutoHematologyAnalyzer,path:'/products/autohematologyanalyzer'},
-        {name:'Magnetic Resonance Pancreatography (MRP 6000) ',img:MrpDetail,path:'/products/mrp'},
-                {name:'Portable Ultrasound Machine ',img:PortableUltrasoundMachine,path:'/products/portableultrasoundmachine'}
+      { name: 'Defibrillator', img: Defibrillator ,path:'/products/defibrillator'},
+
+        // {name:'Magnetic Resonance Pancreatography (MRP 6000) ',img:MrpDetail,path:'/products/mrp'},
 
 
 ];
@@ -79,14 +80,15 @@ const Product = () => {
   };
 
   const imageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    borderRadius: '8px',
-    position: 'absolute',
-    bottom: '0',
-    left: '0',
-  };
+      width: '100%',
+      height: '600px',
+  objectfit: 'contain',
+      borderRadius: '8px',
+          opacity: 0.9, // This makes image 40% visible (adjust as needed)
+      position: 'absolute',
+      bottom: '0', // Make the bottom aligned with the container's bottom
+      left: '0',
+    };
 
   const overlayStyle = {
     position: 'absolute',
@@ -122,7 +124,7 @@ const Product = () => {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gap: '16px',
-      backgroundColor: '#D0E7F0' // Dark blue
+      backgroundColor: '#003366' // Dark blue
 
   };
 
@@ -154,8 +156,8 @@ const Product = () => {
     <>
       <div style={containerStyle}>
         <img src={ProductHeaderImage} alt="Product Header" style={imageStyle} />
-        <div style={{ ...overlayStyle, top: '20px' }}>INNOVATIVE MEDICAL PRODUCTS</div>
-        <div style={{ ...overlayStyle, top: '80px' }}>TECHNOLOGY THAT DELIVERS CARE</div>
+        {/* <div style={{ ...overlayStyle, top: '20px' }}>INNOVATIVE MEDICAL PRODUCTS</div>
+        <div style={{ ...overlayStyle, top: '80px' }}>TECHNOLOGY THAT DELIVERS CARE</div> */}
         <button style={buttonStyle} onClick={scrollToContent}>
           View More
         </button>
@@ -179,20 +181,7 @@ const Product = () => {
   </Link>
 ))}
 
-  {/* {products.map((p, idx) => (
-    <Link to={`/products/${idx}`} key={idx} style={{ textDecoration: 'none' }}>
-      <div
-        style={itemStyle}
-        onMouseEnter={() => setHovered(idx)}
-        onMouseLeave={() => setHovered(null)}
-      >
-        {hovered === idx
-          ? <img src={p.img} alt={p.name} style={imgHoverStyle} />
-          : <span style={nameStyle}>{p.name}</span>
-        }
-      </div>
-    </Link>
-  ))} */}
+  
 </div>
 
 
@@ -215,15 +204,12 @@ const Product = () => {
               title: 'Products',
               items: [
                 'ECG (Electrocardiograph)',
-                'BPL Monitor',
-                'Pathology',
-                'Defibrillator',
-                'Syringe Infusion Pump',
-                'Volumetric Infusion Pump',
-                'Baby Warmer',
-                'Suction Machine',
-                'Pulse Oximeter',
-                'Echo Ultrasound']
+                'Multipara Monitor',
+              'Cardiotocography',
+                  'Auto Hematology Analyzer',
+                  'Magnetic Resonance Pancreatography',
+                  'Portable Ultrasound Machine '
+]
             },
             {
               title: 'Solutions',
@@ -270,12 +256,49 @@ const Product = () => {
                           item === 'Purpose' ||
                           item === 'Perspective' ||
                           item === 'Our Business' ||
-                          item === 'Business'
+                          item === 'Business'||
+                          item === 'ECG (Electrocardiograph)' ||
+                            item==='Multipara Monitor'||
+                            item === 'Cardiotocography' ||
+                            item === 'Auto Hematology Analyzer' ||
+                            item === 'Magnetic Resonance Pancreatography' ||
+                            item === 'Portable Ultrasound Machine '
+                            // item === 'BPL Monitor' ||
+                            // item === 'Pathology' ||
+                            // item === 'Defibrillator' ||
+                            // item === 'Syringe Infusion Pump' ||
+                            // item === 'Volumetric Infusion Pump' ||
+                            // item === 'Baby Warmer' ||
+                            // item === 'Suction Machine' ||
+                            // item === 'Pulse Oximeter' ||
+                            // item === 'Echo Ultrasound'
                           ? 'pointer'
                           : 'default'
                     }}
                     onClick={() => {
-                      if (item === 'Contact Us' || item === 'Join Us') {
+                       const productMap = {
+                        'ECG (Electrocardiograph)': '/products/ecg',
+                          'Multipara Monitor':'/products/multiparamonitor',
+                          'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
+                          'Cardiotocography':'/products/cardiotocography',
+                          'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
+                          'Magnetic Resonance Pancreatography':'/products/mrp',
+                          'PortableUltrasoundMachine':'/products/portableultrasoundmachine',
+                          // 'ECG (Electrocardiograph)': '/products/ecg',
+                          // 'BPL Monitor': '/products/bplmonitor',
+                          // 'Pathology': '/products/pathology',
+                          // 'Defibrillator': '/products/defibrillator',
+                          // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
+                          // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
+                          // 'Baby Warmer': '/products/babywarmer',
+                          // 'Suction Machine': '/products/suctionmachine',
+                          // 'Pulse Oximeter': '/products/pulseoximeter',
+                          // 'Echo Ultrasound': '/products/ecoultrasound',
+                        };
+                        if (productMap[item]) {
+                          navigate(`${productMap[item]}`);
+                        }
+                     else if (item === 'Contact Us' || item === 'Join Us') {
                         navigate('/contact');
                         window.scrollTo({ top: 600, behavior: 'smooth' });
                       } else if (
