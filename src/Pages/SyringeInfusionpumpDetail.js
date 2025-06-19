@@ -345,16 +345,7 @@ const SyringeInfusionpumpDetail = () => {
                         'Auto Hematology Analyzer': '/products/autohematologyanalyzer',
                         'Magnetic Resonance Pancreatography': '/products/mrp',
                         'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
-                        // 'ECG (Electrocardiograph)': '/products/ecg',
-                        // 'BPL Monitor': '/products/bplmonitor',
-                        // 'Pathology': '/products/pathology',
-                        // 'Defibrillator': '/products/defibrillator',
-                        // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
-                        // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
-                        // 'Baby Warmer': '/products/babywarmer',
-                        // 'Suction Machine': '/products/suctionmachine',
-                        // 'Pulse Oximeter': '/products/pulseoximeter',
-                        // 'Echo Ultrasound': '/products/ecoultrasound',
+
                       };
 
                       if (productMap[item]) {

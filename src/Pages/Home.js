@@ -122,7 +122,7 @@ const scrollRight = () => {
 const imageStyle = {
   width: '100%',
   height: '100%',
-  objectFit: isMobile ? 'cover' : 'cover',
+  objectFit: isMobile ? 'contain' : 'cover',
   opacity: 0.9,
   position: 'absolute',
   top: 0,
