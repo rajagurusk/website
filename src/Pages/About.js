@@ -15,6 +15,7 @@ import InstagramIcon from '../Images/instagram.png';
 
 const About = () => {
   const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -28,23 +29,32 @@ const About = () => {
   const perspectiveRef = useRef(null);
   const businessRef = useRef(null);
 
-  const containerStyle = {
-    position: 'relative', width: '100%', height: '80vh', backgroundColor: '#f9f9f9',
-    display: 'flex', justifyContent: 'center', alignItems: 'center'
-  };
-
-  const imageStyle = {
-      width: '100%',
-      height: '100%',
-  objectfit: 'contain',
-      opacity: 0.9, // This makes image 40% visible (adjust as needed)
-      borderRadius: '8px',
-      position: 'absolute',
-      bottom: '0', // Make the bottom aligned with the container's bottom
-      left: '0',
-          zIndex: 1,
-
+   const containerStyle = {
+       position: 'relative',
+  width: '100%',
+  height: isMobile ? '30vh' : '90vh',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  overflow: 'hidden',
+  minHeight: isMobile ? '30vh' : '400px',
+  maxHeight: '100vh',
     };
+  const imageStyle = {
+    width: '100%',
+    height: '100%',
+    objectfit: 'contain',
+    opacity: 0.9, // This makes image 40% visible (adjust as needed)
+    borderRadius: '8px',
+    position: 'absolute',
+    bottom: '0', // Make the bottom aligned with the container's bottom
+    left: '0',
+    zIndex: 1,
+
+  };
   const textOverlayStyle = {
     position: 'absolute', top: '20px', right: '5%', color: '#000000', fontSize: '32px', fontWeight: 'bold', zIndex: 2, textAlign: 'right', lineHeight: '1.6'
   };
@@ -68,25 +78,44 @@ const About = () => {
   return (
     <div>
       {/* Header Image Section */}
-      <div style={containerStyle}>
+      <div className="header-container" style={containerStyle}>
         <img src={AboutBanner} alt="About Us" style={imageStyle} />
-        {/* <div style={textOverlayStyle}>
-          AT MINDRON MEDITECH, WE DELIVER ADVANCED MEDICAL <br />
-          SOLUTIONS THAT REDEFINE CLINICAL EXCELLENCE.
-        </div>
-        <div style={secondTextOverlayStyle}>
-          OUR MISSION IS CLEAR: TO SUPPORT CAREGIVERS <br />
-          WITH RELIABLE TECHNOLOGY AND UNMATCHED SERVICE.
-        </div> */}
-        <button style={buttonStyle} onClick={() => navigate('/contact')}>
+
+<div
+  style={{
+    position: 'absolute',
+    top: '50%',
+    left: isMobile ? '20px' : '50px',
+    transform: 'translateY(-50%)',
+    color: 'black',
+    fontSize: isMobile ? '20px' : '46px',
+    fontWeight: 'bold',
+    maxWidth: isMobile ? '90%' : '400px',
+    lineHeight: '1.4',
+    zIndex: 2,
+  }}
+>
+  Welcome To<br />
+  Mindron Meditech<br /> Private Limited
+</div>
+
+        {/* <button style={buttonStyle} onClick={() => navigate('/contact')}>
           Contact Us
-        </button>
+        </button> */}
       </div>
 
       {/* Navigation Text Section */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '60%', textAlign: 'center' }}>
-          {['Purpose', 'Perspective', 'Business'].map((item, index) => (
+      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+<div style={{
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  gap: '24px',
+  marginTop: '24px',
+  padding: '0 10%',
+  flexWrap: 'wrap'
+}} className="section-block">
+          {['About', 'Our Mission', 'Vision'].map((item, index) => (
             <div
               key={index}
               className="text-item"
@@ -101,74 +130,182 @@ const About = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
-      {/* Purpose Section */}
-      <div ref={purposeRef} style={{ marginTop: '40px', padding: '0 10%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-          <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Purpose</h2>
-        </div>
-      </div>
+<div style={{ padding: '40px 10%' }}>
+  {/* About */}
+  <div style={{ marginBottom: '40px' }}>
+    <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>About</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+<strong>Mindron Meditech Pvt. Ltd.</strong> is a growing Indian medical device manufacturer and an innovation-driven healthcare technology company based in Mumbai, India. With years of experience in the industry, we are committed to delivering safe, reliable, and forward-thinking innovative solutions for the healthcare sectors.<br/>
 
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', marginTop: '24px', padding: '0 10%', flexWrap: 'wrap' }}>
-        <img data-aos="fade-top"
-          data-aos-duration="1000"
-          src={PurposeImage} alt="Purpose Illustration" style={{ width: '30%', minWidth: '200px', borderRadius: '8px' }} />
-        <div style={{ flex: 1 }}>
-          <p data-aos="fade-left"
-            data-aos-duration="1000"
-            style={{ fontSize: '28px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
-            <strong>At Mindron Meditech, our purpose</strong> is to empower healthcare professionals by
-            delivering cutting-edge medical technologies. We believe that every innovation
-            should be driven by real clinical needs and designed for maximum patient benefit.
-          </p>
-        </div>
-      </div>
+Authorized by the Central Drugs Standard Control Organisation (CDSCO) & ISO, we have steadily built a reputation as a trusted partner in medical technology. Today, we proudly support a wide network of clients including hospitals, clinics, diagnostic centres, and healthcare professionals with products.    </p>
+  </div>
 
-      {/* Perspective Section */}
-      <div ref={perspectiveRef} style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', marginTop: '60px', padding: '0 10%', flexWrap: 'wrap' }}>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-            <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Perspective</h2>
-          </div>
-          <p data-aos="fade-right"
-            data-aos-duration="1000"
-            style={{ fontSize: '24px', color: '#333', lineHeight: '1.8', maxWidth: '100%', fontWeight: '500', marginTop: '16px' }}>
-            Our perspective is rooted in a deep understanding of clinical challenges. We continuously
-            evolve with the changing landscape of medical needs and technology to provide adaptive
-            and forward-thinking solutions that improve lives.
-          </p>
-        </div>
-        <img data-aos="fade-top"
-          data-aos-duration="1000"
-          src={PerspectiveImage} alt="Perspective Illustration" style={{ width: '40%', minWidth: '250px', borderRadius: '8px' }} />
-      </div>
+  {/* Mission */}
+  <div style={{ marginBottom: '40px' }}>
+    <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Our Mission</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+      <strong>At Mindron Meditech</strong>, our mission is to empower healthcare providers with advanced, affordable, and reliable diagnostic technologies. We are committed to designing and manufacturing high-quality medical equipment that enhance clinical accuracy and improve patient outcomes.
+    </p>
+  </div>
 
-      {/* Business Section */}
-      <div ref={businessRef} style={{ marginTop: '60px', padding: '0 10%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-          <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Business</h2>
-        </div>
-      </div>
+  {/* Vision */}
+  <div>
+    <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Vision</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+To become a trusted global name in medical technology by delivering innovative, precise diagnostic solutions that elevate healthcare standards and make advanced care accessible to every healthcare provider.
+    </p>
+  </div>
+</div>
+<div style={{ padding: '0 10%', marginTop: '40px' }}>
+  {/* Section 3: R&D Excellence */}
+  <div style={{ marginBottom: '40px' }}>
+    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>R&D Excellence</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+We are actively engaged in research and development for ICU and NICU product, supporting the ‘Make in India’ initiative and contributing to the nation’s self-reliance in critical medical technology.</p>  </div>
 
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', marginTop: '24px', padding: '0 10%', flexWrap: 'wrap' }}>
-        <img data-aos="fade-top"
-          data-aos-duration="1000"
-          src={BusinessImage} alt="Business Illustration" style={{ width: '40%', minWidth: '200px', borderRadius: '8px' }} />
-        <div style={{ flex: 1 }}>
-          <p data-aos="fade-left"
-            data-aos-duration="1000"
-            style={{ fontSize: '26px', color: '#333', lineHeight: '1.6', maxWidth: '100%' }}>
-            <strong>Our business strategy</strong> is grounded in innovation, trust, and long-term partnerships.
-            At Mindron Meditech, we focus on scalable solutions that meet global healthcare demands
-            while maintaining the highest standards of quality and regulatory compliance.
-          </p>
-        </div>
-      </div>
+  {/* Section 4: Our Achievements */}
+  <div style={{ marginBottom: '40px' }}>
+    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>Our Achievements</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+At Mindron Meditech, our growth is marked by a series of proud milestones in regulatory excellence.    </p>
+    <ul data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.8', marginTop: '12px', paddingLeft: '20px' }}>
+      <li>DPIIT-Certified Startup – Government of India</li>
+      <li>ISO 13485 Certified – Recognized for consistent quality Management system</li>
+      <li>CE Marked – Meeting global safety and performance standards</li>
+      <li>CDSCO Approved – Compliant with India’s medical device regulations</li>
+      {/* <li>Make in India Aligned – Promoting domestic innovation and production</li> */}
+    </ul>
+    
+  </div>
 
+  {/* Section 5: Why Choose Us */}
+  <div>
+    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>What Drives Us</h2>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+We are committed to promoting ‘Made in India’ products and building a self-reliant medical device industry. Our goal is to develop and deliver high-quality medical technologies made in India, serving both local and global healthcare needs. With a focus on innovation and purpose, we aim to make India a trusted source for reliable and affordable medical solutions.    </p>
+    {/* <h4 data-aos="fade-right" data-aos-duration="1000"  style={{ fontSize: '20px', fontWeight: '600', marginTop: '12px', color: '#003366' }}>What Sets Us Apart:</h4>
+    <ul data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.8', paddingLeft: '20px' }}>
+      <li>Over a decade of proven expertise</li>
+      <li>In-house innovation through advanced R&D</li>
+      <li>High-quality, cost-effective solutions</li>
+      <li>Globally trusted by professionals</li>
+      <li>Excellent after-sales support</li>
+      <li>Committed to local innovation (Make in India)</li>
+    </ul>
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+      Whether you're a healthcare provider, distributor, or institution—Mindron Meditech is your trusted partner.
+    </p> */}
+  </div>
+</div>
+
+{/* ✅ Now add Investor Section BELOW */}
+<div style={{ padding: '0 10%', marginBottom: '40px' }}>
+  {/* Investor Heading */}
+  <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>
+    Investment Partner
+  </h2>
+
+  {/* Row layout: Image Left, Text Right */}
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '24px'
+  }}>
+    {/* Image */}
+    <img
+      src={require('../Images/investor.jpg')} // replace with actual path
+      alt="Investor"
+      style={{
+        width: '20%',
+        minWidth: '200px',
+        borderRadius: '12px',
+        objectFit: 'cover',
+      }}
+    />
+
+    {/* Text Section */}
+    <div style={{ flex: 1 }}>
+      {/* Name Heading */}
+      <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '0 0 12px 0' }}>
+        Mr. Paresh Mangukiya
+      </h3>
+
+      {/* Description */}
+      <p
+        data-aos="fade-right"
+        data-aos-duration="1000"
+        style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: 0 }}
+      >
+        We are backed by an experienced investor with a strong foothold in the steel sectors, diamond manufacturing, and hospitality sectors. Their industry expertise and strategic guidance support our long-term growth and global expansion.      </p>
+    </div>
+  </div>
+
+
+{/* CEO Section */}
+<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', padding: '40px 10%', flexWrap: 'wrap-reverse', paddingLeft: '10px' }}>
+  {/* Text Left */}
+  <div style={{ flex: '1 1 60%', minWidth: '280px' }}>
+    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>CEO</h2>
+
+    {/* CEO Name Heading */}
+    <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '8px 0' }}>
+Mr. Rohit Bhanushali    </h3>
+{/* CEO Name Heading
+<h3 style={{
+  fontSize: '20px',
+  fontWeight: 'bold',
+  color: '#003366',
+  margin: '8px 0',
+  textAlign: 'right'   // Aligns the text to the right
+}}>
+  Mr. Rohit Bhanushali
+</h3> */}
+
+    {/* Paragraph */}
+    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+Our CEO is a visionary leader who has driven Mindron Meditech's success, achieving milestones like DPIIT, ISO, CE, and CDSCO certifications. With a passion for innovation and excellence, he propels our growth and global impact.</p>  </div>
+
+  {/* Image Right */}
+  <div style={{ flex: '1 1 35%', minWidth: '220px', marginLeft: 'auto', maxWidth: '50px' }}>
+    <img
+      src={require('../Images/ceo.jpg')} // Replace with your actual image path
+      alt="CEO"
+      style={{
+        width: '600px',
+              height: '350px',       // Set desired height
+        maxWidth: '250px',
+        borderRadius: '12px',
+        objectFit: 'cover'
+      }}
+    />
+  </div>
+</div>
+
+
+
+</div>
+
+<style>
+  {`
+    @media (max-width: 768px) {
+      .header-container {
+        height: 30vh !important;
+      }
+    }
+  `}
+</style>
       {/* Bottom Banner Section */}
       <div style={{
         backgroundColor: '#003366', padding: '20px 5% 40px 5%', color: '#fff', marginTop: '60px', overflowX: 'auto'  // add horizontal scroll if needed
@@ -185,32 +322,18 @@ const About = () => {
               items: [
                 'ECG (Electrocardiograph)',
                 'Multipara Monitor',
-              'Cardiotocography',
-                  'Auto Hematology Analyzer',
-                  'Magnetic Resonance Pancreatography',
-                  'Portable Ultrasound Machine '
+                'Cardiotocography',
+                'Auto Hematology Analyzer',
+                // 'Magnetic Resonance Pancreatography',
+                'Portable Ultrasound Machine '
               ]
 
             },
-            {
-              title: 'Solutions',
-              items: [
-                'Hospitalwide Solution', 'Emergency Care', 'Critical Care',
-                'Perioperative Care', 'Medical Imaging', 'Laboratory Diagnostics', 'Minimally Invasive Surgery'
-              ]
-            },
-            {
-              title: 'Resource Center',
-              items: [
-                'Training and Education', 'Patient Monitoring Accessories', 'Customer Contact Center',
-                'Media Center', 'Events & Activities', 'Customer Stories', 'News', 'Blog', 'Press'
-              ]
-            },
+            
             {
               title: 'About Us',
               items: [
-                'Purpose', 'Perspective', 'Our Business', 'History',
-                'Our Culture', 'ESG', 'Investor Relations', 'Virtual Tour with Mindray', 'Covid-19 Response'
+                'About', 'Our Mission', 'Vision'
               ]
             },
             {
@@ -234,16 +357,16 @@ const About = () => {
                       cursor:
                         item === 'Contact Us' ||
                           item === 'Join Us' ||
-                          item === 'Purpose' ||
-                          item === 'Perspective' ||
-                          item === 'Our Business' ||
+                          item === 'About' ||
+                          item === 'Our Mission' ||
+                          item === 'Vision' ||
                           item === 'Business' ||
                           item === 'ECG (Electrocardiograph)' ||
-                            item==='Multipara Monitor'||
-                            item === 'Cardiotocography' ||
-                            item === 'Auto Hematology Analyzer' ||
-                            item === 'Magnetic Resonance Pancreatography' ||
-                            item === 'Portable Ultrasound Machine '
+                          item === 'Multipara Monitor' ||
+                          item === 'Cardiotocography' ||
+                          item === 'Auto Hematology Analyzer' ||
+                          item === 'Magnetic Resonance Pancreatography' ||
+                          item === 'Portable Ultrasound Machine '
                           // item === 'ECG (Electrocardiograph)' ||
                           // item === 'BPL Monitor' ||
                           // item === 'Pathology' ||
@@ -260,12 +383,12 @@ const About = () => {
                     onClick={() => {
                       const productMap = {
                         'ECG (Electrocardiograph)': '/products/ecg',
-                          'Multipara Monitor':'/products/multiparamonitor',
-                          'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
-                          'Cardiotocography':'/products/cardiotocography',
-                          'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
-                          'Magnetic Resonance Pancreatography':'/products/mrp',
-                          'Portable Ultrasound Machine':'/products/portableultrasoundmachine',
+                        'Multipara Monitor': '/products/multiparamonitor',
+                        'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
+                        'Cardiotocography': '/products/cardiotocography',
+                        'Auto Hematology Analyzer': '/products/autohematologyanalyzer',
+                        // 'Magnetic Resonance Pancreatography': '/products/mrp',
+                        'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
                         // 'ECG (Electrocardiograph)': '/products/ecg',
                         // 'BPL Monitor': '/products/bplmonitor',
                         // 'Pathology': '/products/pathology',
@@ -285,10 +408,10 @@ const About = () => {
                         navigate('/contact');
                         window.scrollTo({ top: 600, behavior: 'smooth' });
                       } else if (
-                        item === 'Purpose' ||
-                        item === 'Perspective' ||
-                        item === 'Our Business' ||
-                        item === 'Business'
+                        item === 'About' ||
+                        item === 'Our Mission' ||
+                        item === 'Vision' 
+                        // item === 'Business'
                       ) {
                         const sectionKey = item.toLowerCase().replace(/\s+/g, '');
                         navigate('/about', { state: { scrollTo: sectionKey } });
@@ -322,7 +445,7 @@ const About = () => {
 
         {/* Left Side */}
         <div style={{ flex: '1', minWidth: '250px', lineHeight: '1.8' }}>
-          <p style={{ margin: '5px 0' }}>📞 <strong>+91 80565 63493</strong></p>
+          <p style={{ margin: '5px 0' }}>📞 <strong>022 4516 6539</strong></p>
           <p style={{ margin: '5px 0' }}>✉️ <strong>info@mindronmeditech.com</strong></p>
           <p style={{ margin: '5px 0' }}>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
         </div>
@@ -337,7 +460,7 @@ const About = () => {
             <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
               <img src={TwitterIcon} alt="Twitter" style={{ width: '32px', height: '32px' }} />
             </a>
-            <a href="https://www.linkedin.com/in/mindronmeditech-705963364" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">
               <img src={LinkedInIcon} alt="LinkedIn" style={{ width: '36px', height: '36px' }} />
             </a>
             <a href="https://www.instagram.com/mindronmeditech/#" target="_blank" rel="noopener noreferrer">

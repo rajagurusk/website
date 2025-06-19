@@ -4,25 +4,25 @@ import { useNavigate,Link } from 'react-router-dom'; // 🔹 Import useNavigate
 import '../Pages/style.css';
 
 import ProductHeaderImage from '../Images/productpage.jpg'; // header
-import ECGImage from '../Images/ecg1.jpeg';
+import ECGImage from '../Images/ecg1.jpg';
 import UCGImage from '../Images/ucg1.png';
-import MultiParaImage from '../Images/multiparamonitor.jpeg';
+import MultiParaImage from '../Images/multiparamonitor.jpg';
 import BPLMULTIPARAMONITOR from '../Images/BPL MULTIPARA MONITOR.png';
 import Pathology from '../Images/pathology.png';
-import Defibrillator from '../Images/defibrillator.jpeg';
-import SyringeInfusionPump from '../Images/syringe infusion pump.png';
-import VolumericInfusionPump from '../Images/volumeric infusion pump.png';
+import Defibrillator from '../Images/defibrillator.jpg';
+import SyringeInfusionPump from '../Images/syringeinjection.jpeg';
+import VolumericInfusionPump from '../Images/volumeinjection.png';
 // import WardBed from '../Images/ward bed.png';
 import BabyWarmer from '../Images/baby warmer.png';
 import SuctionMachine from '../Images/suctionmachine.png';
-import PulseOximeter from '../Images/pulse oximeter.png';
+import PulseOximeter from '../Images/pulsetabletop.jpg';
 import EcoUltrasound from '../Images/eco-ultrasound.png';
 // import OTTable from '../Images/ottable.png';
-import Cardiotocography from '../Images/ctg.jpeg';
-import AutoHematologyAnalyzer from '../Images/AHA.jpeg';
-import MrpDetail from '../Images/mrp6000.jpeg';
-import PortableUltrasoundMachine from '../Images/Portable Ultrasound Machine.jpeg';
-
+import Cardiotocography from '../Images/ctg.jpg';
+import AutoHematologyAnalyzer from '../Images/AHA.jpg';
+import MrpDetail from '../Images/mrp6000.jpg';
+import PortableUltrasoundMachine from '../Images/Portable Ultrasound Machine.jpg';
+import OTT from '../Images/ott.jpg'
 
 import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
@@ -38,17 +38,21 @@ const products = [
   { name: 'Multiparameter Monitor', img: MultiParaImage,path:'/products/multiparamonitor' },
   // { name: 'BPL Monitor', img: BPLMULTIPARAMONITOR ,path:'/products/bplmonitor'},
   // { name: 'Pathology', img: Pathology ,path:'/products/pathology'},
-  // { name: 'Syringe Infusion Pump', img: SyringeInfusionPump,path:'/products/syringeInfusionpump' },
   // { name: 'Volumetric Infusion Pump', img: VolumericInfusionPump,path:'/products/volumericInfusionpump' },
   // // { name: 'Ward Bed', img: WardBed },
   // { name: 'Baby Warmer', img: BabyWarmer,path:'/products/babywarmer' },
   // { name: 'Suction Machine', img: SuctionMachine ,path:'/products/suctionmachine' },
-  // { name: 'Pulse Oximeter', img: PulseOximeter,path:'/products/pulseoximeter' },
   // { name: 'Echo Ultrasound', img: EcoUltrasound ,path:'/products/ecoultrasound'},
   // { name: 'OT Table', img: OTTable },
   {name:'Cardiotocography',img:Cardiotocography,path:'/products/cardiotocography'} ,
     {name:'Auto Hematology Analyzer',img:AutoHematologyAnalyzer,path:'/products/autohematologyanalyzer'},
       { name: 'Defibrillator', img: Defibrillator ,path:'/products/defibrillator'},
+        { name: 'Pulse Oximeter', img: PulseOximeter,path:'/products/pulseoximeter' },
+          { name: 'Infusion Pump', img: SyringeInfusionPump,path:'/products/syringeInfusionpump' },
+                    { name: 'General OT Table', img: OTT,path:'/products/ott' },
+
+
+
 
         // {name:'Magnetic Resonance Pancreatography (MRP 6000) ',img:MrpDetail,path:'/products/mrp'},
 
@@ -76,18 +80,20 @@ const Product = () => {
     backgroundColor: '#f9f9f9',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',  overflow: 'hidden',
+
   };
 
   const imageStyle = {
       width: '100%',
-      height: '600px',
-  objectfit: 'contain',
+      height: '100%',
+  objectfit: 'cover',
       borderRadius: '8px',
           opacity: 0.9, // This makes image 40% visible (adjust as needed)
       position: 'absolute',
       bottom: '0', // Make the bottom aligned with the container's bottom
       left: '0',
+
     };
 
   const overlayStyle = {
@@ -116,29 +122,12 @@ const Product = () => {
   };
 
   const boxStyle = {
-    maxWidth: '1400px',
-    margin: '40px auto',
-    padding: '20px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-    borderRadius: '8px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '16px',
-      backgroundColor: '#003366' // Dark blue
-
-  };
-
-  const itemStyle = {
-    position: 'relative',
-    height: '250px',
-    borderRadius: '4px',
-    overflow: 'hidden',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff'
-  };
+  maxWidth: '1400px',
+  margin: '40px auto',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '16px'
+};
 
   const nameStyle = {
     fontSize: '1.2rem',
@@ -154,37 +143,96 @@ const Product = () => {
 
   return (
     <>
-      <div style={containerStyle}>
+<div className="header-container" style={containerStyle}>
         <img src={ProductHeaderImage} alt="Product Header" style={imageStyle} />
-        {/* <div style={{ ...overlayStyle, top: '20px' }}>INNOVATIVE MEDICAL PRODUCTS</div>
-        <div style={{ ...overlayStyle, top: '80px' }}>TECHNOLOGY THAT DELIVERS CARE</div> */}
-        <button style={buttonStyle} onClick={scrollToContent}>
+              <button style={buttonStyle} onClick={scrollToContent}>
           View More
         </button>
       </div>
 
       <div ref={contentRef} />
+<div className="product-grid-container">
 
-      <div style={boxStyle}>
+<div
+  className="product-grid"
+  style={{
+    padding: '60px 50px 60px 50px', // top, right, bottom, left
+    
+  }}
+>  {products.map((p, index) => (
+    <Link to={p.path} key={index} style={{ textDecoration: 'none' }}>
+      <div className="product-card">
+        <div style={{ padding: '10px' }}>
+          <img
+            src={p.img}
+            alt={p.name}
+            style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'contain'
+            }}
+          />
+        </div>
 
-{products.map((p, index) => (
-  <Link to={p.path} key={index} style={{ textDecoration: 'none' }}>
-    <div
-      style={itemStyle}
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
-    >
-      {hovered === index
-        ? <img src={p.img} alt={p.name} style={imgHoverStyle} />
-        : <span style={nameStyle}>{p.name}</span>}
-    </div>
-  </Link>
-))}
-
-  
+        <div
+          className="product-name-bar"
+          style={{
+            backgroundColor: '#001f4d',
+            color: '#fff',
+            padding: '10px',
+            textAlign: 'center',
+            fontWeight: 'bold',
+          }}
+        >
+          <span>{p.name}</span>
+        </div>
+      </div>
+    </Link>
+  ))}
 </div>
 
+<style>
+  {`
+  @media (max-width: 768px) {
+    .header-container {
+      height: 30vh !important;
+    }
+  }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Default for desktop */
+      gap: 16px;
+      padding: 16px;
+    }
 
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Mobile view */
+      }
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+
+    .product-name-bar {
+      background-color: #001f4d;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  `}
+</style>
 
       {/* Bottom Banner Section */}
       <div style={{
@@ -207,29 +255,15 @@ const Product = () => {
                 'Multipara Monitor',
               'Cardiotocography',
                   'Auto Hematology Analyzer',
-                  'Magnetic Resonance Pancreatography',
+                  // 'Magnetic Resonance Pancreatography',
                   'Portable Ultrasound Machine '
 ]
             },
-            {
-              title: 'Solutions',
-              items: [
-                'Hospitalwide Solution', 'Emergency Care', 'Critical Care',
-                'Perioperative Care', 'Medical Imaging', 'Laboratory Diagnostics', 'Minimally Invasive Surgery'
-              ]
-            },
-            {
-              title: 'Resource Center',
-              items: [
-                'Training and Education', 'Patient Monitoring Accessories', 'Customer Contact Center',
-                'Media Center', 'Events & Activities', 'Customer Stories', 'News', 'Blog', 'Press'
-              ]
-            },
+            
             {
               title: 'About Us',
               items: [
-                'Purpose', 'Perspective', 'Our Business', 'History',
-                'Our Culture', 'ESG', 'Investor Relations', 'Virtual Tour with Mindray', 'Covid-19 Response'
+                'About', 'Our Mission', 'Vision'
               ]
             },
             {
@@ -253,9 +287,10 @@ const Product = () => {
                       cursor:
                         item === 'Contact Us' ||
                           item === 'Join Us' ||
-                          item === 'Purpose' ||
-                          item === 'Perspective' ||
-                          item === 'Our Business' ||
+                           item === 'About' ||
+                          item === 'Our Mission' ||
+                          item === 'Vision' ||
+                          item === 'Business' ||
                           item === 'Business'||
                           item === 'ECG (Electrocardiograph)' ||
                             item==='Multipara Monitor'||
@@ -282,7 +317,7 @@ const Product = () => {
                           'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
                           'Cardiotocography':'/products/cardiotocography',
                           'Auto Hematology Analyzer':'/products/autohematologyanalyzer',
-                          'Magnetic Resonance Pancreatography':'/products/mrp',
+                          // 'Magnetic Resonance Pancreatography':'/products/mrp',
                           'PortableUltrasoundMachine':'/products/portableultrasoundmachine',
                           // 'ECG (Electrocardiograph)': '/products/ecg',
                           // 'BPL Monitor': '/products/bplmonitor',
@@ -302,10 +337,9 @@ const Product = () => {
                         navigate('/contact');
                         window.scrollTo({ top: 600, behavior: 'smooth' });
                       } else if (
-                        item === 'Purpose' ||
-                        item === 'Perspective' ||
-                        item === 'Our Business' ||
-                        item === 'Business'
+                        item === 'About' ||
+                        item === 'Our Mission' ||
+                        item === 'Vision' 
                       ) {
                         const sectionKey = item.toLowerCase().replace(/\s+/g, '');
                         navigate('/about', { state: { scrollTo: sectionKey } });
@@ -333,7 +367,7 @@ const Product = () => {
       }}>
         {/* Left */}
         <div style={{ lineHeight: '1.8' }}>
-          <p>📞 <strong>+91 80565 63493</strong></p>
+          <p>📞 <strong>022 4516 6539</strong></p>
           <p>✉️ <strong>info@mindronmeditech.com</strong></p>
           <p>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
         </div>
@@ -356,7 +390,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-
+</div>
 
     </>
   );

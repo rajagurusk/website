@@ -1,11 +1,10 @@
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import { useNavigate } from 'react-router-dom'; // 🔹 Import useNavigate
 import ProductDetail from '../Pages/ProductDetail';
 import '../Pages/style.css';
 
-// import heroVideo from '../Images/home1.jpg'; // adjust the path based on your folder structure
 import Image1 from '../Images/home2.jpg';
 import Image2 from '../Images/home1.jpg';
 import Image3 from '../Images/home3.jpg';
@@ -15,50 +14,62 @@ import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
 import InstagramIcon from '../Images/instagram.png';
-import Product1 from '../Images/BPL MULTIPARA MONITOR.png';
-import Product2 from '../Images/pulse oximeter.png';
-import Product3 from '../Images/syringe infusion pump.png';
-import Product4 from '../Images/baby warmer.png';
-import Product5 from '../Images/defibrillator.jpeg';
-
+// import Product1 from '../Images/BPL MULTIPARA MONITOR.png';
+import Product2 from '../Images/ecg1.jpg';
+import Product3 from '../Images/ctg.jpg';
+import Product4 from '../Images/multiparamonitor.jpg';
+import Product5 from '../Images/USG.jpg';
+import Product6 from '../Images/pulsefinger.jpg'
 
 const Home = () => {
   const images = [Image1, Image2, Image3, Image4];
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate(); // 🔹 Initialize navigate
+  const isMobile = window.innerWidth <= 768;
+  const scrollRef = useRef(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+
 
   const products = [
     {
       id: 1,
-      name: 'Defibrillator',
+      name: 'Ultrasound Machine',
       image: Product5,
       description: 'High-quality defibrillator for emergency cardiac care...',
+            path: '/products/portableultrasoundmachine',
+
       // Add other fields as needed for your ProductDetail.js
     },
     {
       id: 2,
-      name: 'Pulse Oximeter',
+      name: 'ECG',
       image: Product2,
       description: 'Accurate pulse oximeter for monitoring blood oxygen levels...',
+            path: '/products/ecg',
+
     },
     {
       id: 3,
-      name: 'Syringe Infusion Pump',
+      name: 'CTG',
       image: Product3,
       description: 'Reliable infusion pump for controlled medication delivery...',
+      path:'/products/cardiotocography',
     },
     {
       id: 4,
-      name: 'Baby Warmer',
+      name: 'Multipara Monitor',
       image: Product4,
       description: 'Safe baby warmer for neonatal care...',
+      path:'/products/multiparamonitor',
     },
     {
       id: 5,
-      name: 'BPL Multipara Monitor',
-      image: Product1,
-      description: 'Multipara monitor with advanced features...',
-    }
+      name: 'Pulse Oximeter',
+      image: Product6,
+      description: 'Safe baby warmer for neonatal care...',
+      path:'/products/pulseoximeter',
+    },
   ];
   const handleImageClick = (clickedImg) => {
     const index = ProductDetail.findIndex(p => p.image === clickedImg);
@@ -67,55 +78,57 @@ const Home = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
-
   useEffect(() => {
-
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [images.length]);
   useEffect(() => {
     AOS.init({ duration: 1000, once: false, });
   }, []);
+  
   // Click handler to navigate to ProductDetail with product data
   const handleProductClick = (product) => {
     navigate('/productdetail', { state: { product } });
   };
+  const scrollLeft = () => {
+  if (scrollRef.current) {
+    scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+  }
+};
 
-  // const videoStyle = {
-  //   position: 'absolute',
-  //   top: 110,
-  //   left: 0,
-  //   width: '100%',
-  //   height: '50%',
-  //   objectFit: 'cover',
-  //   opacity: 0.5, // transparent effect
-  //   zIndex: 1
-  // };
+const scrollRight = () => {
+  if (scrollRef.current) {
+    scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+  }
+};
 
-   const headerStyle = {
-    position: 'relative',
-    width: '100%',
-    height: '90vh',
-    // backgroundColor: '#003366', // Navy Blue
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  };
+ const headerStyle = {
+  position: 'relative',
+  width: '100%',
+  height: isMobile ? '30vh' : '90vh',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  overflow: 'hidden',
+  minHeight: isMobile ? '30vh' : '400px',
+  maxHeight: '100vh',
+};
 
-    const imageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    opacity: 0.9, // This makes image 40% visible (adjust as needed)
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1,
-  };
-
+const imageStyle = {
+  width: '100%',
+  height: '100%',
+  objectFit: isMobile ? 'cover' : 'cover',
+  opacity: 0.9,
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  zIndex: 1,
+};
 
   const indicatorWrapperStyle = {
     position: 'absolute',
@@ -157,7 +170,11 @@ const Home = () => {
     fontSize: '2.5rem',
     fontWeight: 'bold',
     zIndex: 2,
-    textAlign: 'right'
+    textAlign: 'right',
+        objectFit: 'cover',
+
+        objectPosition: 'top', // 👈 aligns the image to show the top part
+
   };
 
   const overlayTopLeftTextStyle = {
@@ -201,28 +218,7 @@ const Home = () => {
   };
 
   return (
-    // <div style={{ position: 'relative', minHeight: '100vh' }}>
-    //   <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-    //     {/* <video
-    //       src={heroVideo}
-    //       autoPlay
-    //       loop
-    //       muted
-    //       playsInline
-    //       style={{
-    //         width: '100%',
-    //         height: '100%',
-    //         objectFit: 'cover',
-    //         opacity: 0.5, // transparent effect
-    //         backgroundColor: '#003366',
-
-    //         mixBlendMode: 'screen', // removes green when blended with dark blue
-
-    //       }} */}
-    //     />
-    //   </div>
-
-    // Your overlay text/buttons here if needed
+    // Your overlay text/buttons here if needed   
         <div style={{ position: 'relative', minHeight: '100vh' }}>
 
       <div style={{
@@ -235,7 +231,7 @@ const Home = () => {
         zIndex: 2,
       }}>
       </div> 
-       <div style={headerStyle}>
+<div className="header-container" style={headerStyle}>
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
@@ -244,12 +240,12 @@ const Home = () => {
 
         {currentIndex === 0 && (
           <div style={overlayBottomCenterTextStyle}>
-            Transforming Diagnostics into Decisions
+            {/* Transforming Diagnostics into Decisions */}
           </div>
         )}
         {currentIndex === 1 && (
           <div style={overlayTextStyle}>
-            Smart Devices,<br />Safer Lives.
+            {/* Smart Devices,<br />Safer Lives. */}
           </div>
         )}
         {currentIndex === 2 && (
@@ -258,15 +254,11 @@ const Home = () => {
           </div>
         )}
         {currentIndex === 3 && (
+          
           <div style={overlayRightTextStyle}>
-            Empowering Healthcare<br />with Innovation
+            {/* Empowering Healthcare<br />with Innovation */}
           </div>
         )}
-
-        <div style={learnMoreButtonStyle}>
-          <button style={buttonStyle}>Learn More</button>
-        </div>
-
         <div style={indicatorWrapperStyle}>
           {images.map((_, index) => (
             <div
@@ -284,17 +276,19 @@ const Home = () => {
           width: '60px',
           height: '6px',
           flexWrap: 'wrap', // helps on smaller screens
-
           backgroundColor: 'red',
           borderRadius: '2px',
           marginBottom: '10px'
         }} />
         <h2 style={{ fontSize: '2rem', marginBottom: '10px' }}>Products</h2>
         <p style={{ fontSize: '1.5rem', color: '#555' }}>
-          Discover our cutting-edge products designed to make<br /> healthcare safer, smarter,and more efficient-empowering <br />
-          medical professionals with innovative technology,<br />
-          improving patient outcomes, and shaping<br /> the future of healthcare.
-        </p>
+  Explore Mindron Meditech’s advanced medical solutions, <br />crafted to make
+  healthcare safer, smarter, and more <br />accessible. Our innovations
+  empower medical <br />professionals, enhance patient care, and drive<br />
+  the future of healthcare through precision, reliability, and<br />
+  a commitment to excellence.
+</p>
+
         <button
           style={{
             marginTop: '20px',
@@ -320,139 +314,232 @@ const Home = () => {
           Explore More
         </button>
         {/* Replace your product image map with this: */}
-        <div style={{
-          marginLeft: '625px',
-          marginTop: '-300px',
-          flex: '1 1 45%',
-          paddingTop: '10px',
-          padding: '10px',
-          overflowX: 'auto',
-          whiteSpace: 'nowrap',
-          display: 'flex',
-          gap: '20px',
-          scrollSnapType: 'x mandatory',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}>
-          {products.map((product) => (
-            <img
-              data-aos="fade-right"
-              data-aos-duration="1000"
-              key={product.id}
-              src={product.image}
-              alt={product.name}
-              onClick={() => handleProductClick(product)}
-              style={{
-                width: '300px',
-                height: '300px',
-                flex: '0 0 auto',
-                borderRadius: '10px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                scrollSnapAlign: 'start',
-                cursor: 'pointer',
-              }}
-            />
-          ))}
-        </div>
+        <div style={{ position: 'relative', marginTop: '-300px' }}>
+  {/* Left Arrow */}
+  <button
+    onClick={scrollLeft}
+    style={{
+      position: 'absolute',
+      top: '50%',
+    left: 'calc(50% - 20px)', // Adjust this value to bring it closer to center
+      transform: 'translateY(-50%)',
+      zIndex: 10,
+      backgroundColor: '#fff',
+      border: 'none',
+      borderRadius: '50%',
+      width: '40px',
+      height: '40px',
+      cursor: 'pointer',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+    }}
+  >
+    ◀
+  </button>
 
+  {/* Scrollable Products */}
+  <div
+    ref={scrollRef}
+    style={{
+      marginLeft: '625px',
+      flex: '1 1 45%',
+      paddingTop: '10px',
+      padding: '10px',
+      overflowX: 'auto',
+      whiteSpace: 'nowrap',
+      display: 'flex',
+      gap: '20px',
+      scrollSnapType: 'x mandatory',
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none'
+    }}
+  >
+    {products.map((product, index) => (
+      <div
+        key={product.id || index}
+        onClick={() => navigate(product.path)}
+        className="product-card"
+        style={{
+          cursor: 'pointer',
+          display: 'inline-block',
+          width: '300px',
+          flex: '0 0 auto',
+          scrollSnapAlign: 'start',
+        }}
+      >
+        <img
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          src={product.image}
+          alt={product.name}
+          style={{
+            width: '100%',
+            height: '300px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
+        />
+      </div>
+    ))}
+  </div>
 
+  {/* Right Arrow */}
+  <button
+    onClick={scrollRight}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      right: '0',
+      transform: 'translateY(-50%)',
+      zIndex: 10,
+      backgroundColor: '#fff',
+      border: 'none',
+      borderRadius: '50%',
+      width: '40px',
+      height: '40px',
+      cursor: 'pointer',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+    }}
+  >
+    ▶
+  </button>
+</div>
 
+    <div
+  className="whats-new-section"
+  style={{
+    marginTop: '40px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '20px',
+    flexWrap: 'wrap',
+  }}
+>
+  {/* Image on the Left (or Top in Mobile) */}
+  <img
+    data-aos="fade-right"
+    data-aos-duration="1000"
+    src={WhatsNewImage}
+    alt="What's New"
+    className="whats-new-image"
+    style={{
+      width: '38%',
+      minWidth: '280px',
+      borderRadius: '10px',
+    }}
+  />
 
+  {/* Text on the Right (or Bottom in Mobile) */}
+  <div
+    className="whats-new-text"
+    style={{
+      flex: 1,
+      minWidth: '280px',
+      marginLeft: '20px',
+    }}
+  >
+    <h2 style={{ fontSize: '2rem', margin: 0 }}>Mindron Insights</h2>
 
+    <div
+  style={{
+    maxHeight: '280px',
+    overflowY: 'scroll',
+    paddingRight: '10px',
+    marginTop: '20px',
+
+    /* Hide scrollbar for Webkit (Chrome, Safari) */
+    scrollbarWidth: 'none',       // Firefox
+    msOverflowStyle: 'none',      // IE 10+
+  }}
+  className="scroll-hide"
+>
+<p style={{ fontSize: '20px', marginBottom: '16px', color: '#333' }}>
+      <strong style={{ color: '#003366' }}>Certified for Excellence:</strong> Proud to be ISO certified, CE marked, CDSCO approved, and DPIIT-recognized—your trust, our responsibility.
+    </p>
+    <p style={{ fontSize: '20px', marginBottom: '16px', color: '#333' }}>
+      <strong style={{ color: '#003366' }}>R&D:</strong> Sneak peeks into new product development
+
+Technological advancements at Mindron Labs
+
+Behind-the-scenes with your engineering or design teams
+
+    </p>
+    <p style={{ fontSize: '20px', color: '#333' }}>
+      <strong style={{ color: '#003366' }}>    Industry Updates:</strong> 
+Recent advancements in medical technology
+
+New regulations 
+
+Trends in diagnostic equipment
+    </p>
+
+      <div className="mobile-product-details">
+        {/* ➜ ECG
         <div
-          style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
-          <img
-            data-aos="fade-right"
-            data-aos-duration="1000"
-            src={WhatsNewImage}
-            alt="What's New"
-            style={{ width: '38%', borderRadius: '10px' }}
-          />
-          <div style={{ marginLeft: '20px', marginTop: '-10px', flex: 1 }}>
-            <h2 style={{ fontSize: '2rem', margin: 0 }}>What's New</h2>
-
-            <div style={{
-              maxHeight: '320px', // Show around 2 items (adjust as needed)
-              overflowY: 'auto',
-              paddingRight: '10px',
-              marginTop: '20px',
-              scrollbarWidth: 'none',        // Firefox
-              msOverflowStyle: 'none'        // IE 10+
-            }}>
-              {/* ECG */}
-              <div
-
-                style={{
-                  fontSize: '1.5rem',
-                  color: '#001F54',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  marginBottom: '10px'
-                }}
-                onClick={() => navigate('/products/ecg')}
-                onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-              >
-                ➜ ECG (Electrocardiograph)
-              </div>
-              <p style={{ fontSize: '1.2rem', color: '#555', lineHeight: '1.0' }}>
-                With advanced signal processing and user-friendly interfaces, <strong>Mindron Meditech’s ECG</strong> solutions empower healthcare professionals to make informed decisions swiftly.
-              </p>
-
-              {/* UCG */}
-              <div
-
-                style={{
-                  fontSize: '1.5rem',
-                  color: '#001F54',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  marginTop: '20px'
-                }}
-                onClick={() => navigate('/products/ucg')}
-                onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-              >
-                ➜ USG (Ultrasound Sonography)
-              </div>
-              <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.0' }}>
-                Our USG machines provide real-time imaging and precise cardiac monitoring to assist clinicians in accurate diagnoses.
-              </p>
-
-              {/* Multipara Monitor */}
-              <div
-                style={{
-                  fontSize: '1.5rem',
-                  color: '#001F54',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  marginTop: '20px'
-                }}
-                onClick={() => navigate('/products/multiparamonitor')}
-                onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-              >
-                ➜ Multipara Monitor (High end/Low end)
-              </div>
-              <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.6' }}>
-                Our Multipara Monitors combine precision and ease of use, offering real-time tracking of vital signs including ECG, SPO2, NIBP, and temperature, designed for both ICU and mobile applications.
-              </p>
-            </div>
-          </div>
-
-
+          style={{
+            fontSize: '1.5rem',
+            color: '#001F54',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            marginBottom: '10px',
+          }}
+          onClick={() => navigate('/products/ecg')}
+          onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+          onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+        >
+          ➜ ECG (Electrocardiograph)
         </div>
+        <p style={{ fontSize: '1.2rem', color: '#555', lineHeight: '1.4' }}>
+          With advanced signal processing and user-friendly interfaces, <strong>Mindron Meditech’s ECG</strong> solutions empower healthcare professionals to make informed decisions swiftly.
+        </p>
+
+        ➜ USG
+        <div
+          style={{
+            fontSize: '1.5rem',
+            color: '#001F54',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            marginTop: '20px',
+          }}
+          onClick={() => navigate('/products/portableultrasoundmachine')}
+          onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+          onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+        >
+          ➜ USG (Ultrasound Sonography)
+        </div>
+        <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.4' }}>
+          Our USG machines provide real-time imaging and precise cardiac monitoring to assist clinicians in accurate diagnoses.
+        </p>
+
+        ➜ Multipara Monitor
+        <div
+          style={{
+            fontSize: '1.5rem',
+            color: '#001F54',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            marginTop: '20px',
+          }}
+          onClick={() => navigate('/products/multiparamonitor')}
+          onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+          onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+        >
+          ➜ Multipara Monitor (High end/Low end)
+        </div>
+        <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '10px', lineHeight: '1.4' }}>
+          Our Multipara Monitors combine precision and ease of use, offering real-time tracking of vital signs including ECG, SPO2, NIBP, and temperature, designed for both ICU and mobile applications.
+        </p> */}
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
         {/* About Us Section */}
         <div
-
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -490,10 +577,7 @@ const Home = () => {
                 lineHeight: '1.5',
                 fontWeight: 'normal'
               }}>
-              At Mindron Meditech, we are committed to enhancing healthcare outcomes through innovation and excellence.
-              Our team of experts is dedicated to delivering reliable, cutting-edge medical devices that healthcare professionals trust.
-              We prioritize patient safety, product quality, and regulatory compliance in everything we do.
-              By combining advanced technology with user-centric design, we aim to simplify clinical workflows and improve diagnostic accuracy.
+              <strong>Mindron Meditech Pvt. Ltd.</strong> is a growing Indian medical device manufacturer and an innovation-driven healthcare technology company based in Mumbai, India. With years of experience in the industry, we are committed to delivering safe, reliable, and forward-thinking innovative solutions for the healthcare sectors.<br/>
             </p>
 
             <button
@@ -536,6 +620,15 @@ const Home = () => {
             }}
           />
         </div>
+<style>
+  {`
+    @media (max-width: 768px) {
+      .header-container {
+        height: 30vh !important;
+      }
+    }
+  `}
+</style>
 
 
         {/* Bottom Banner Section */}
@@ -559,31 +652,30 @@ const Home = () => {
                   'Multipara Monitor',
                   'Cardiotocography',
                   'Auto Hematology Analyzer',
-                  'Magnetic Resonance Pancreatography',
+                  // 'Magnetic Resonance Pancreatography',
                   'Portable Ultrasound Machine '
 
                 ]
               },
-              {
-                title: 'Solutions',
-                items: [
-                  'Hospitalwide Solution', 'Emergency Care', 'Critical Care',
-                  'Perioperative Care', 'Medical Imaging', 'Laboratory Diagnostics', 'Minimally Invasive Surgery'
-                ]
-              },
-              {
-                title: 'Resource Center',
-                items: [
-                  'Training and Education', 'Patient Monitoring Accessories', 'Customer Contact Center',
-                  'Media Center', 'Events & Activities', 'Customer Stories', 'News', 'Blog', 'Press'
-                ]
-              },
+              // {
+              //   title: 'Solutions',
+              //   items: [
+              //     'Hospitalwide Solution', 'Emergency Care', 'Critical Care',
+              //     'Perioperative Care', 'Medical Imaging', 'Laboratory Diagnostics', 'Minimally Invasive Surgery'
+              //   ]
+              // },
+              // {
+              //   title: 'Resource Center',
+              //   items: [
+              //     'Training and Education', 'Patient Monitoring Accessories', 'Customer Contact Center',
+              //     'Media Center', 'Events & Activities', 'Customer Stories', 'News', 'Blog', 'Press'
+              //   ]
+              // },
               {
                 title: 'About Us',
                 items: [
-                  'Purpose', 'Perspective', 'Our Business', 'History',
-                  'Our Culture', 'ESG', 'Investor Relations', 'Virtual Tour with Mindray', 'Covid-19 Response'
-                ]
+                'About', 'Our Mission', 'Vision'
+                     ]
               },
               {
                 title: 'Contact Information',
@@ -607,9 +699,10 @@ const Home = () => {
                         cursor:
                           item === 'Contact Us' ||
                             item === 'Join Us' ||
-                            item === 'Purpose' ||
-                            item === 'Perspective' ||
-                            item === 'Our Business' ||
+                            item === 'About' ||
+                          item === 'Our Mission' ||
+                          item === 'Vision' ||
+                          item === 'Business' ||
                             item === 'Business' ||
                             item === 'ECG (Electrocardiograph)' ||
                             item==='Multipara Monitor'||
@@ -653,10 +746,9 @@ const Home = () => {
                           navigate('/contact');
                           window.scrollTo({ top: 600, behavior: 'smooth' });
                         } else if (
-                          item === 'Purpose' ||
-                          item === 'Perspective' ||
-                          item === 'Our Business' ||
-                          item === 'Business'
+                          item === 'About' ||
+                        item === 'Our Mission' ||
+                        item === 'Vision' 
                         ) {
                           const sectionKey = item.toLowerCase().replace(/\s+/g, '');
                           navigate('/about', { state: { scrollTo: sectionKey } });
@@ -690,7 +782,7 @@ const Home = () => {
         }}>
           {/* Left Side */}
           <div style={{ flex: '1', minWidth: '300px', lineHeight: '1.8' }}>
-            <p style={{ margin: '5px 0' }}>📞 <strong>+91 80565 63493</strong></p>
+            <p style={{ margin: '5px 0' }}>📞 <strong>022 4516 6539</strong></p>
             <p style={{ margin: '5px 0' }}>✉️ <strong>info@mindronmeditech.com</strong></p>
             <p style={{ margin: '5px 0' }}>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
           </div>
@@ -705,7 +797,7 @@ const Home = () => {
               <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
                 <img src={TwitterIcon} alt="Twitter" style={{ width: '32px', height: '32px' }} />
               </a>
-              <a href="https://www.linkedin.com/in/mindronmeditech-705963364" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">
                 <img src={LinkedInIcon} alt="LinkedIn" style={{ width: '36px', height: '36px' }} />
               </a>
               <a href="https://www.instagram.com/mindronmeditech/#" target="_blank" rel="noopener noreferrer">

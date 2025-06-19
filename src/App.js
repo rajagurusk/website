@@ -7,6 +7,8 @@ import Home from './Pages/Home';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Product from './Pages/Product';
+import Event from './Pages/Event'; // adjust path
+
 // import ProductDetail from './Pages/ProductDetail';
 import EcgDetail from './Pages/EcgDetail';
 import UcgDetail from './Pages/UcgDetail';
@@ -24,18 +26,24 @@ import CardiotocographyDetail from './Pages/CardiotocographyDetail';
 import AhaDetail from './Pages/AhaDetail';
 import MrpDetail from './Pages/MrpDetail';
 import PortableUltrasoundMachineDetail from './Pages/PortableUltrasoundMachineDetail';
+import ScrollToTop from './Components/ScrollToTop'; // adjust path accordingly
+import OTTdetail from './Pages/OTTdetail';
+
 
 
 function App() {
   return (
     <Router>
       <Navbar />
+            <ScrollToTop /> {/* 👈 Add this line here */}
+
       <div className="p-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/events" element={<Event />} />
           {/* <Route path="/products/:id" element={<ProductDetail />} /> */}
           <Route path="/products/ecg" element={<EcgDetail />} />
           <Route path="/products/ucg" element={<UcgDetail />} />
@@ -53,6 +61,7 @@ function App() {
           <Route path="/products/autohematologyanalyzer" element={<AhaDetail />} />
           <Route path="/products/mrp" element={<MrpDetail />} />
           <Route path="/products/portableultrasoundmachine" element={<PortableUltrasoundMachineDetail />} />
+          <Route path="/products/ott" element={<OTTdetail />} />
 
 
 

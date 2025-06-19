@@ -1,14 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const router = express.Router();
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // or your frontend URL
+  origin: 'http://localhost:3000',
   methods: ['POST', 'GET'],
   credentials: true
 }));
@@ -34,27 +33,26 @@ const contactSchema = new mongoose.Schema({
 
 const Contact = mongoose.model('Contact', contactSchema);
 
+// Reuse transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  },
+  logger: true,
+  debug: true
+});
+
 // POST endpoint to save and email contact
 app.post('/api/contact', async (req, res) => {
   try {
     const newContact = new Contact(req.body);
     await newContact.save();
 
-    // Set up nodemailer transport
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      },
-      logger: true,
-      debug: true
-    });
-
-    // Compose email
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // you can send to yourself or another email
+      to: process.env.EMAIL_USER,
       subject: `New Contact Submission from ${newContact.firstName} ${newContact.lastName}`,
       text: `
 First Name: ${newContact.firstName}
@@ -65,11 +63,8 @@ Message: ${newContact.message}
       `
     };
 
-    // Send email
-    // Send email
-const info = await transporter.sendMail(mailOptions);
-console.log('Email sent:', info.response);
-
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.response);
 
     res.status(201).json({ success: true, contact: newContact });
   } catch (err) {
@@ -78,13 +73,13 @@ console.log('Email sent:', info.response);
   }
 });
 
-const port = process.env.PORT || 5000;
-app.listen(port, () =>
-  console.log(`🚀 Server listening on http://localhost:${port}`)
-);
-
-// Catch-all for non-API routes
+// Catch-all 404 route
 app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
+// Start server
+const port = process.env.PORT || 5000;
+app.listen(port, () =>
+  console.log(`🚀 Server listening on http://localhost:${port}`)
+);
