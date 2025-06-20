@@ -4,19 +4,34 @@
   align-items: center;
   background-color: #005bab;
   padding: 10px 20px;
-  color: white;
   position: relative;
 }
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+.logo-img {
+  display: block;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* pushes it to the far right */
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  color: white;
+}
+
+/* Menu list */
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 20px;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -26,41 +41,29 @@
   text-decoration: none;
 }
 
-.hamburger {
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* ✅ Mobile Styles */
 @media (max-width: 768px) {
-  .main-section {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 20px;
-  }
-
-  .main-section img,
-  .main-section .text-block,
-  .main-section .features,
-  .main-section .footer {
-    width: 100%;
-  }
-
-  .hamburger {
+  .menu-icon {
     display: block;
+  }
+ 
+  .logo-img {
+    display: none;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #005bab;
+    background-color: #001f54;
     position: absolute;
-    top: 60px;
+    top: 0; /* Align to top */
     left: 0;
+    height: 100vh; /* Full screen height */
     width: 100%;
-    padding: 10px 0;
+    justify-content: center; /* vertically center */
+    align-items: center;     /* horizontally center */
+    padding: 0;
+    margin: 0;
+    z-index: 999;
   }
 
   .nav-links.active {
@@ -69,31 +72,14 @@
 
   .nav-links li {
     text-align: center;
-    padding: 10px 0;
-  }
-}
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #001f54;
-    position: absolute;
-    top: 70px;
-    left: 0;
+    padding: 15px 0;
     width: 100%;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 
-  .nav-links.active {
-    display: flex;
-  }
-
-  .nav-link-text {
-    color: white !important;
-  }
-
-  .menu-icon {
-    display: block;
+  .nav-links li a {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
   }
 }

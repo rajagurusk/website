@@ -1,12 +1,10 @@
 import AOS from 'aos';
+import { useState, useLayoutEffect } from 'react';
 import 'aos/dist/aos.css';
 import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Pages/style.css';
 import AboutBanner from '../Images/aboutus.jpg';
-import PurposeImage from '../Images/purpose.jpg';
-import PerspectiveImage from '../Images/perspective.jpg';
-import BusinessImage from '../Images/business.jpg';
 import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
@@ -15,42 +13,49 @@ import InstagramIcon from '../Images/instagram.png';
 
 const About = () => {
   const navigate = useNavigate();
-  const isMobile = window.innerWidth <= 768;
+const [isMobile, setIsMobile] = useState(false);
+
+useLayoutEffect(() => {
+  setIsMobile(window.innerWidth <= 768);
+}, []);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
   }, []);
 
-  //   const handleProductClick = (productName) => {
-  //   navigate('/products/:id', { state: { productName } });
-  // };
-
   const purposeRef = useRef(null);
   const perspectiveRef = useRef(null);
   const businessRef = useRef(null);
 
-   const containerStyle = {
-       position: 'relative',
-  width: '100%',
-  height: isMobile ? '30vh' : '90vh',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  overflow: 'hidden',
-  minHeight: isMobile ? '30vh' : '400px',
-  maxHeight: '100vh',
-    };
+  const containerStyle = {
+    position: 'relative',
+    width: '100%',
+height: isMobile ? '30vh' : '90vh',
+minHeight: isMobile ? '30vh' : '400px',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    minHeight: isMobile ? '30vh' : '400px',
+    // maxHeight: '100vh',
+  };
   const imageStyle = {
     width: '100%',
     height: '100%',
     objectfit: 'contain',
-    opacity: 0.9, // This makes image 40% visible (adjust as needed)
+    opacity: 0.9,
     borderRadius: '8px',
     position: 'absolute',
-    bottom: '0', // Make the bottom aligned with the container's bottom
+    bottom: '0',
     left: '0',
     zIndex: 1,
 
@@ -81,234 +86,179 @@ const About = () => {
       <div className="header-container" style={containerStyle}>
         <img src={AboutBanner} alt="About Us" style={imageStyle} />
 
-<div
-  style={{
-    position: 'absolute',
-    top: '50%',
-    left: isMobile ? '20px' : '50px',
-    transform: 'translateY(-50%)',
-    color: 'black',
-    fontSize: isMobile ? '20px' : '46px',
-    fontWeight: 'bold',
-    maxWidth: isMobile ? '90%' : '400px',
-    lineHeight: '1.4',
-    zIndex: 2,
-  }}
->
-  Welcome To<br />
-  Mindron Meditech<br /> Private Limited
-</div>
-
-        {/* <button style={buttonStyle} onClick={() => navigate('/contact')}>
-          Contact Us
-        </button> */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: isMobile ? '20px' : '50px',
+            transform: 'translateY(-50%)',
+            color: 'black',
+            fontSize: isMobile ? '20px' : '46px',
+            fontWeight: 'bold',
+            maxWidth: isMobile ? '90%' : '400px',
+            lineHeight: '1.4',
+            zIndex: 2,
+          }}
+        >
+          Welcome To<br />
+          Mindron Meditech<br /> Private Limited
+        </div>
       </div>
 
-      {/* Navigation Text Section */}
-      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-<div style={{
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'flex-start',
-  gap: '24px',
-  marginTop: '24px',
-  padding: '0 10%',
-  flexWrap: 'wrap'
-}} className="section-block">
-          {['About', 'Our Mission', 'Vision'].map((item, index) => (
-            <div
-              key={index}
-              className="text-item"
-              onClick={() => scrollToSection(item)}
-              style={{
-                cursor: 'pointer', fontSize: '24px', fontWeight: '', color: '#003366',
-                padding: '10px', marginRight: index < 2 ? '1.5rem' : '0', position: 'relative'
-              }}
-            >
-              {item}
-              <div className="arrow"></div>
-            </div>
-          ))}
+      <div style={{ padding: '40px 10%' , fontFamily: 'sans-serif' }}>
+        {/* About */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>About</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            <strong>Mindron Meditech Pvt. Ltd.</strong> is a growing Indian medical device manufacturer and an innovation-driven healthcare technology company based in Mumbai, India. With years of experience in the industry, we are committed to delivering safe, reliable, and forward-thinking innovative solutions for the healthcare sectors.<br />
+
+            Authorized by the Central Drugs Standard Control Organisation (CDSCO) & ISO, we have steadily built a reputation as a trusted partner in medical technology. Today, we proudly support a wide network of clients including hospitals, clinics, diagnostic centres, and healthcare professionals with products.    </p>
         </div>
-      </div> */}
 
-<div style={{ padding: '40px 10%' }}>
-  {/* About */}
-  <div style={{ marginBottom: '40px' }}>
-    <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>About</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-<strong>Mindron Meditech Pvt. Ltd.</strong> is a growing Indian medical device manufacturer and an innovation-driven healthcare technology company based in Mumbai, India. With years of experience in the industry, we are committed to delivering safe, reliable, and forward-thinking innovative solutions for the healthcare sectors.<br/>
+        {/* Mission */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Our Mission</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            <strong>At Mindron Meditech</strong>, our mission is to empower healthcare providers with advanced, affordable, and reliable diagnostic technologies. We are committed to designing and manufacturing high-quality medical equipment that enhance clinical accuracy and improve patient outcomes.
+          </p>
+        </div>
 
-Authorized by the Central Drugs Standard Control Organisation (CDSCO) & ISO, we have steadily built a reputation as a trusted partner in medical technology. Today, we proudly support a wide network of clients including hospitals, clinics, diagnostic centres, and healthcare professionals with products.    </p>
-  </div>
+        {/* Vision */}
+        <div>
+          <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Vision</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            To become a trusted global name in medical technology by delivering innovative, precise diagnostic solutions that elevate healthcare standards and make advanced care accessible to every healthcare provider.
+          </p>
+        </div>
+      </div>
+      <div style={{ padding: '0 10%', marginTop: '40px' }}>
+        {/* Section 3: R&D Excellence */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>R&D Excellence</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            We are actively engaged in research and development for ICU and NICU product, supporting the ‘Make in India’ initiative and contributing to the nation’s self-reliance in critical medical technology.</p>  </div>
 
-  {/* Mission */}
-  <div style={{ marginBottom: '40px' }}>
-    <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Our Mission</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-      <strong>At Mindron Meditech</strong>, our mission is to empower healthcare providers with advanced, affordable, and reliable diagnostic technologies. We are committed to designing and manufacturing high-quality medical equipment that enhance clinical accuracy and improve patient outcomes.
-    </p>
-  </div>
+        {/* Section 4: Our Achievements */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>Our Achievements</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            At Mindron Meditech, our growth is marked by a series of proud milestones in regulatory excellence.    </p>
+          <ul data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.8', marginTop: '12px', paddingLeft: '20px' }}>
+            <li>DPIIT-Certified Startup – Government of India</li>
+            <li>ISO 13485 Certified – Recognized for consistent quality Management system</li>
+            <li>CE Marked – Meeting global safety and performance standards</li>
+            <li>CDSCO Approved – Compliant with India’s medical device regulations</li>
+            {/* <li>Make in India Aligned – Promoting domestic innovation and production</li> */}
+          </ul>
 
-  {/* Vision */}
-  <div>
-    <div style={{ width: '60px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>Vision</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-To become a trusted global name in medical technology by delivering innovative, precise diagnostic solutions that elevate healthcare standards and make advanced care accessible to every healthcare provider.
-    </p>
-  </div>
-</div>
-<div style={{ padding: '0 10%', marginTop: '40px' }}>
-  {/* Section 3: R&D Excellence */}
-  <div style={{ marginBottom: '40px' }}>
-    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>R&D Excellence</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-We are actively engaged in research and development for ICU and NICU product, supporting the ‘Make in India’ initiative and contributing to the nation’s self-reliance in critical medical technology.</p>  </div>
+        </div>
 
-  {/* Section 4: Our Achievements */}
-  <div style={{ marginBottom: '40px' }}>
-    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>Our Achievements</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-At Mindron Meditech, our growth is marked by a series of proud milestones in regulatory excellence.    </p>
-    <ul data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.8', marginTop: '12px', paddingLeft: '20px' }}>
-      <li>DPIIT-Certified Startup – Government of India</li>
-      <li>ISO 13485 Certified – Recognized for consistent quality Management system</li>
-      <li>CE Marked – Meeting global safety and performance standards</li>
-      <li>CDSCO Approved – Compliant with India’s medical device regulations</li>
-      {/* <li>Make in India Aligned – Promoting domestic innovation and production</li> */}
-    </ul>
-    
-  </div>
+        {/* Section 5: Why Choose Us */}
+        <div>
+          <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>What Drives Us</h2>
+          <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+            We are committed to promoting ‘Made in India’ products and building a self-reliant medical device industry. Our goal is to develop and deliver high-quality medical technologies made in India, serving both local and global healthcare needs. With a focus on innovation and purpose, we aim to make India a trusted source for reliable and affordable medical solutions.    </p>
+        </div>
+      </div>
 
-  {/* Section 5: Why Choose Us */}
-  <div>
-    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>What Drives Us</h2>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-We are committed to promoting ‘Made in India’ products and building a self-reliant medical device industry. Our goal is to develop and deliver high-quality medical technologies made in India, serving both local and global healthcare needs. With a focus on innovation and purpose, we aim to make India a trusted source for reliable and affordable medical solutions.    </p>
-    {/* <h4 data-aos="fade-right" data-aos-duration="1000"  style={{ fontSize: '20px', fontWeight: '600', marginTop: '12px', color: '#003366' }}>What Sets Us Apart:</h4>
-    <ul data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.8', paddingLeft: '20px' }}>
-      <li>Over a decade of proven expertise</li>
-      <li>In-house innovation through advanced R&D</li>
-      <li>High-quality, cost-effective solutions</li>
-      <li>Globally trusted by professionals</li>
-      <li>Excellent after-sales support</li>
-      <li>Committed to local innovation (Make in India)</li>
-    </ul>
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-      Whether you're a healthcare provider, distributor, or institution—Mindron Meditech is your trusted partner.
-    </p> */}
-  </div>
-</div>
+      {/* ✅ Now add Investor Section BELOW */}
+      <div style={{ padding: '0 10%', marginBottom: '40px' }}>
+        {/* Investor Heading */}
+        <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>
+          Investment Partner
+        </h2>
 
-{/* ✅ Now add Investor Section BELOW */}
-<div style={{ padding: '0 10%', marginBottom: '40px' }}>
-  {/* Investor Heading */}
-  <div style={{ width: '40px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>
-    Investment Partner
-  </h2>
+        {/* Row layout: Image Left, Text Right */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '24px'
+        }}>
+          {/* Image */}
+          <img
+            src={require('../Images/investor.jpg')} // replace with actual path
+            alt="Investor"
+            style={{
+              width: '20%',
+              minWidth: '200px',
+              borderRadius: '12px',
+              objectFit: 'cover',
+            }}
+          />
 
-  {/* Row layout: Image Left, Text Right */}
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: '24px'
-  }}>
-    {/* Image */}
-    <img
-      src={require('../Images/investor.jpg')} // replace with actual path
-      alt="Investor"
-      style={{
-        width: '20%',
-        minWidth: '200px',
-        borderRadius: '12px',
-        objectFit: 'cover',
-      }}
-    />
+          {/* Text Section */}
+          <div style={{ flex: 1 }}>
+            {/* Name Heading */}
+            <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '0 0 12px 0' }}>
+              Mr. Paresh Mangukiya
+            </h3>
 
-    {/* Text Section */}
-    <div style={{ flex: 1 }}>
-      {/* Name Heading */}
-      <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '0 0 12px 0' }}>
-        Mr. Paresh Mangukiya
-      </h3>
-
-      {/* Description */}
-      <p
-        data-aos="fade-right"
-        data-aos-duration="1000"
-        style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: 0 }}
-      >
-        We are backed by an experienced investor with a strong foothold in the steel sectors, diamond manufacturing, and hospitality sectors. Their industry expertise and strategic guidance support our long-term growth and global expansion.      </p>
-    </div>
-  </div>
+            {/* Description */}
+            <p
+              data-aos="fade-right"
+              data-aos-duration="1000"
+              style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: 0 }}
+            >
+We are backed by a seasoned investor with a strong presence in the Metal, Real Estate, diamond manufacturing, and hospitality sectors. With decades of experience, they bring deep industry insight, strategic guidance, and a proven track record of driving global growth. Their extensive network, financial strength, and commitment to innovation enable us to scale efficiently and seize new opportunities across markets. Aligned with our vision for excellence and sustainability, they are a trusted and valued partner in our journey toward long-term success.               </p>
+          </div>
+        </div>
 
 
-{/* CEO Section */}
-<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', padding: '40px 10%', flexWrap: 'wrap-reverse', paddingLeft: '10px' }}>
-  {/* Text Left */}
-  <div style={{ flex: '1 1 60%', minWidth: '280px' }}>
-    <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
-    <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>CEO</h2>
+        {/* CEO Section */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', padding: '40px 10%', flexWrap: 'wrap-reverse', paddingLeft: '10px' }}>
+          {/* Text Left */}
+          <div style={{ flex: '1 1 60%', minWidth: '280px' }}>
+            <div style={{ width: '45px', height: '6px', backgroundColor: 'red', marginBottom: '8px' }}></div>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#003366', margin: 0 }}>CEO</h2>
 
-    {/* CEO Name Heading */}
-    <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '8px 0' }}>
-Mr. Rohit Bhanushali    </h3>
-{/* CEO Name Heading
-<h3 style={{
-  fontSize: '20px',
-  fontWeight: 'bold',
-  color: '#003366',
-  margin: '8px 0',
-  textAlign: 'right'   // Aligns the text to the right
-}}>
-  Mr. Rohit Bhanushali
-</h3> */}
+            {/* CEO Name Heading */}
+            <h3 data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '20px', fontWeight: 'bold', color: '#003366', margin: '8px 0' }}>
+              Mr. Rohit Bhanushali    </h3>
+            {/* Paragraph */}
+            <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
+Our CEO is a visionary leader who has been instrumental in driving Mindron Meditech’s success, achieving significant milestones including DPIIT, ISO, CE, and CDSCO certifications. With a passion for innovation and excellence, he continues to propel our growth and expand our global impact. Backed by years of industry experience, he brings strategic foresight, operational excellence, and a deep understanding of healthcare technology. His leadership fosters a culture of integrity, continuous improvement, and customer-centric innovation, positioning Mindron Meditech as a trusted name in the medical device industry.              </p>  </div>
 
-    {/* Paragraph */}
-    <p data-aos="fade-right" data-aos-duration="1000" style={{ fontSize: '18px', color: '#333', lineHeight: '1.6', marginTop: '12px' }}>
-Our CEO is a visionary leader who has driven Mindron Meditech's success, achieving milestones like DPIIT, ISO, CE, and CDSCO certifications. With a passion for innovation and excellence, he propels our growth and global impact.</p>  </div>
-
-  {/* Image Right */}
-  <div style={{ flex: '1 1 35%', minWidth: '220px', marginLeft: 'auto', maxWidth: '50px' }}>
-    <img
-      src={require('../Images/ceo.jpg')} // Replace with your actual image path
-      alt="CEO"
-      style={{
-        width: '600px',
-              height: '350px',       // Set desired height
-        maxWidth: '250px',
-        borderRadius: '12px',
-        objectFit: 'cover'
-      }}
-    />
-  </div>
-</div>
+          {/* Image Right */}
+          <div style={{ flex: '1 1 35%', minWidth: '220px', marginLeft: 'auto', maxWidth: '50px' }}>
+            <img
+              src={require('../Images/ceo.jpg')} // Replace with your actual image path
+              alt="CEO"
+              style={{
+                width: '600px',
+                height: '350px',       // Set desired height
+                maxWidth: '250px',
+                borderRadius: '12px',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+        </div>
 
 
 
-</div>
+      </div>
 
-<style>
-  {`
+      <style>
+        {`
     @media (max-width: 768px) {
       .header-container {
         height: 30vh !important;
       }
     }
   `}
-</style>
-      {/* Bottom Banner Section */}
+      </style>
+      {/* Bottom Banner Section//'20px 5% 40px 5%' */}
       <div style={{
-        backgroundColor: '#003366', padding: '20px 5% 40px 5%', color: '#fff', marginTop: '60px', overflowX: 'auto'  // add horizontal scroll if needed
+        backgroundColor: '#003366', padding: '0', color: '#fff', margin: '0',marginTop: '60px', overflowX: 'auto'  // add horizontal scroll if needed
       }}>
         <div style={{
           display: 'flex',
@@ -324,12 +274,11 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
                 'Multipara Monitor',
                 'Cardiotocography',
                 'Auto Hematology Analyzer',
-                // 'Magnetic Resonance Pancreatography',
                 'Portable Ultrasound Machine '
               ]
 
             },
-            
+
             {
               title: 'About Us',
               items: [
@@ -367,16 +316,6 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
                           item === 'Auto Hematology Analyzer' ||
                           item === 'Magnetic Resonance Pancreatography' ||
                           item === 'Portable Ultrasound Machine '
-                          // item === 'ECG (Electrocardiograph)' ||
-                          // item === 'BPL Monitor' ||
-                          // item === 'Pathology' ||
-                          // item === 'Defibrillator' ||
-                          // item === 'Syringe Infusion Pump' ||
-                          // item === 'Volumetric Infusion Pump' ||
-                          // item === 'Baby Warmer' ||
-                          // item === 'Suction Machine' ||
-                          // item === 'Pulse Oximeter' ||
-                          // item === 'Echo Ultrasound'
                           ? 'pointer'
                           : 'default'
                     }}
@@ -387,18 +326,7 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
                         'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
                         'Cardiotocography': '/products/cardiotocography',
                         'Auto Hematology Analyzer': '/products/autohematologyanalyzer',
-                        // 'Magnetic Resonance Pancreatography': '/products/mrp',
                         'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
-                        // 'ECG (Electrocardiograph)': '/products/ecg',
-                        // 'BPL Monitor': '/products/bplmonitor',
-                        // 'Pathology': '/products/pathology',
-                        // 'Defibrillator': '/products/defibrillator',
-                        // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
-                        // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
-                        // 'Baby Warmer': '/products/babywarmer',
-                        // 'Suction Machine': '/products/suctionmachine',
-                        // 'Pulse Oximeter': '/products/pulseoximeter',
-                        // 'Echo Ultrasound': '/products/ecoultrasound',
                       };
 
                       if (productMap[item]) {
@@ -410,8 +338,7 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
                       } else if (
                         item === 'About' ||
                         item === 'Our Mission' ||
-                        item === 'Vision' 
-                        // item === 'Business'
+                        item === 'Vision'
                       ) {
                         const sectionKey = item.toLowerCase().replace(/\s+/g, '');
                         navigate('/about', { state: { scrollTo: sectionKey } });
@@ -447,7 +374,7 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
         <div style={{ flex: '1', minWidth: '250px', lineHeight: '1.8' }}>
           <p style={{ margin: '5px 0' }}>📞 <strong>022 4516 6539</strong></p>
           <p style={{ margin: '5px 0' }}>✉️ <strong>info@mindronmeditech.com</strong></p>
-          <p style={{ margin: '5px 0' }}>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
+<p style={{ margin: '5px 0' }}>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
         </div>
 
         {/* Right Side */}
@@ -457,13 +384,13 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
             <a href="https://www.facebook.com/mindronmeditech" target="_blank" rel="noopener noreferrer">
               <img src={FacebookIcon} alt="Facebook" style={{ width: '32px', height: '32px' }} />
             </a>
-            <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/Mindrommtech" target="_blank" rel="noopener noreferrer">
               <img src={TwitterIcon} alt="Twitter" style={{ width: '32px', height: '32px' }} />
             </a>
             <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">
               <img src={LinkedInIcon} alt="LinkedIn" style={{ width: '36px', height: '36px' }} />
             </a>
-            <a href="https://www.instagram.com/mindronmeditech/#" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/mindronmeditech/" target="_blank" rel="noopener noreferrer">
               <img src={InstagramIcon} alt="Instagram" style={{ width: '32px', height: '32px' }} />
             </a>
           </div>
@@ -506,8 +433,6 @@ Our CEO is a visionary leader who has driven Mindron Meditech's success, achievi
             opacity: 1;
           }
         `
-
-
         }
       </style>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import monitorMain from '../Images/multiparamonitor.jpg';
 import monitorAlt from '../Images/multilowend.jpg';
 import image2 from '../Images/multihigh2.jpeg';
@@ -9,9 +9,9 @@ const imageDetails = {
   [monitorMain]: {
     heading: 'Multipara Monitor (High End) ',
     title: 'Model: MT 70 Plus',
-        images: [monitorMain, image2], // 👈 Add multiple images here
+    images: [monitorMain, image2],
     description:
-"The monitor is applicable for clinical monitoring in operating room, postoperative observation room, ICU/CCU ward, emergency room, etc. of adult, pediatric and neonate. The patient's vital parameters (ECG (including ST-segment measurement and arrhythmia analysis), RESP, SpO2, PR, NIBP, TEMP, IBP and CO2, etc.) can be monitored. Monitored information can be displayed, reviewed, printed and stored.",
+      "The monitor is applicable for clinical monitoring in operating room, postoperative observation room, ICU/CCU ward, emergency room, etc. of adult, pediatric and neonate. The patient's vital parameters (ECG (including ST-segment measurement and arrhythmia analysis), RESP, SpO2, PR, NIBP, TEMP, IBP and CO2, etc.) can be monitored. Monitored information can be displayed, reviewed, printed and stored.",
     sections: {
       Features: [
         '15/17.3" high-definition touch screen design, easy and convenient to operate, elegant and concise in appearance.',
@@ -30,7 +30,7 @@ const imageDetails = {
         '3-channel built-in recorder (optional).',
         'Connects to Central Monitoring System via WiFi or Wired network.',
         'Standby mode – useful for ICU, reduces workload and enhances patient rest.',
-      ],    
+      ],
     },
   },
   [monitorAlt]: {
@@ -41,34 +41,34 @@ const imageDetails = {
     sections: {
       Features: [
         'Standard parameters: ECG, RESP, SpO2, PR, NIBP, dual channel TEMP',
-  'ECG: Heart rate (HR), ECG waveform, Arrhythmia analysis, ST-segment analysis',
-  'RESP: Respiration rate (RR), Respiration waveform',
-  'SpO2: Oxygen saturation (SpO2), Plethysmogram (PLETH) waveform',
-  'Pulse Rate (PR): Displayed with bar graph',
-  'NIBP: Systolic pressure (SYS), Diastolic pressure (DIA), Mean pressure (MEAN)',
-  'TEMP: T1, T2, TD',
-  'IBP (optional): CH1 - SYS, DIA, MAP; CH2 - SYS, DIA, MAP',
-  'CO2 (optional): EtCO2, InsCO2 (Inspired Minimum CO2), AwRR (Airway Respiration Rate)',
-  'Additional functions: Audible and visual alarms, trend data storage and output',
-  'NIBP measurement with alarm event marking',
-  'Drug concentration calculation',
+        'ECG: Heart rate (HR), ECG waveform, Arrhythmia analysis, ST-segment analysis',
+        'RESP: Respiration rate (RR), Respiration waveform',
+        'SpO2: Oxygen saturation (SpO2), Plethysmogram (PLETH) waveform',
+        'Pulse Rate (PR): Displayed with bar graph',
+        'NIBP: Systolic pressure (SYS), Diastolic pressure (DIA), Mean pressure (MEAN)',
+        'TEMP: T1, T2, TD',
+        'IBP (optional): CH1 - SYS, DIA, MAP; CH2 - SYS, DIA, MAP',
+        'CO2 (optional): EtCO2, InsCO2 (Inspired Minimum CO2), AwRR (Airway Respiration Rate)',
+        'Additional functions: Audible and visual alarms, trend data storage and output',
+        'NIBP measurement with alarm event marking',
+        'Drug concentration calculation',
       ],
       Functions: [
         '12.1" TFT color LCD with multi-language interface (English, French, German, Italian, Dutch, Russian, Portuguese, Turkish, Spanish [EU & MX], Polish, Romanian, Kazakh, Czech, Traditional Chinese, Bulgarian, Chinese, Ukrainian)',
-  'Fanless design: quiet, energy-saving, and clean, reducing the possibility of cross-infection',
-  'All-round monitoring for adult, pediatric, and neonate patients',
-  'Standard interface options: oxygen graph, trend graph, large character interface, and bed view for easy observation',
-  'Simple operation using keys and knobs',
-  'Maximum 8-channel waveform synchronous display',
-  'Display 7-lead ECG waveform on one screen, with cascade ECG waveform option',
-  'Digital SpO2 technology with anti-motion and anti-ambient light interference; works under weak perfusion',
-  'Heart Rate Variability (HRV) analysis function',
-  'NIBP measurement modes: Manual, AUTO, STAT, with storage for 4800 readings',
-  'Review of 71 alarm events for all parameters and 60 arrhythmia alarm events',
-  'Drug concentration calculator and titration table functions',
-  'One-touch trend graph printing',
-  'Connectivity to Central Monitoring System via 3G, Wi-Fi, or wired mode',
-  'Operates on AC/DC power with a built-in rechargeable lithium battery for uninterrupted monitoring'
+        'Fanless design: quiet, energy-saving, and clean, reducing the possibility of cross-infection',
+        'All-round monitoring for adult, pediatric, and neonate patients',
+        'Standard interface options: oxygen graph, trend graph, large character interface, and bed view for easy observation',
+        'Simple operation using keys and knobs',
+        'Maximum 8-channel waveform synchronous display',
+        'Display 7-lead ECG waveform on one screen, with cascade ECG waveform option',
+        'Digital SpO2 technology with anti-motion and anti-ambient light interference; works under weak perfusion',
+        'Heart Rate Variability (HRV) analysis function',
+        'NIBP measurement modes: Manual, AUTO, STAT, with storage for 4800 readings',
+        'Review of 71 alarm events for all parameters and 60 arrhythmia alarm events',
+        'Drug concentration calculator and titration table functions',
+        'One-touch trend graph printing',
+        'Connectivity to Central Monitoring System via 3G, Wi-Fi, or wired mode',
+        'Operates on AC/DC power with a built-in rechargeable lithium battery for uninterrupted monitoring'
 
       ],
     },
@@ -86,29 +86,52 @@ const MultiparamonitorDetail = () => {
   const currentProduct = imageDetails[mainImage];
   const productImages = currentProduct.images || [mainImage];
   const currentImageSrc = productImages[currentImageIndex];
+const [isMobile, setIsMobile] = useState(false);
+
+useLayoutEffect(() => {
+  const checkWidth = () => setIsMobile(window.innerWidth <= 768);
+  checkWidth(); // runs before paint
+}, []);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   const handleImageClick = (clickedImage) => {
     setMainImage(clickedImage);
     setRelatedImages(allImages.filter((img) => img !== clickedImage));
     setActiveSection('Features');
-    setCurrentImageIndex(0); // Reset index on product change
+    setCurrentImageIndex(0);
   };
 
   return (
-    <div style={{ padding: '0px' }}>
+    <div style={{ padding: '0px', fontFamily: 'sans-serif'  }}>
       {/* ✅ Hero Section */}
-      <div style={{ height: '600px', width: '100%', position: 'relative', marginBottom: '40px' }}>
-        <img
-          src={heroImage}
-          alt="Hero"
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-            width: '100%',
-            height: '100%',
-            borderRadius: '10px',
-          }}
-        />
+<div
+  style={{
+    height: isMobile ? '30vh' : '90vh',
+    width: '100%',
+    position: 'relative',
+    marginBottom: '40px',
+    borderRadius: '10px',
+    overflow: 'hidden',
+  }}
+>
+       <img
+  src={heroImage}
+  alt="Hero"
+  style={{
+    objectFit: 'cover',
+    objectPosition: 'center',
+    width: '100%',
+    height: '100%',
+    display: 'block',
+  }}
+/>
+
       </div>
 
       <div style={{ paddingLeft: '30px' }}>

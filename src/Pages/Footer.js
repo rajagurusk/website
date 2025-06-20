@@ -25,9 +25,8 @@ const Footer = () => {
       window.scrollTo({ top: 600, behavior: 'smooth' });
     } else if (
       item === 'About' ||
-                          item === 'Our Mission' ||
-                          item === 'Vision' 
-                          // item === 'Business' ||
+      item === 'Our Mission' ||
+      item === 'Vision'
     ) {
       const sectionKey = item.toLowerCase().replace(/\s+/g, '');
       navigate('/about', { state: { scrollTo: sectionKey } });
@@ -43,15 +42,14 @@ const Footer = () => {
         'Multipara Monitor',
         'Cardiotocography',
         'Auto Hematology Analyzer',
-        // 'Magnetic Resonance Pancreatography',
         'Portable Ultrasound Machine'
       ]
     },
-   
+
     {
       title: 'About Us',
       items: [
-                'About', 'Our Mission', 'Vision'
+        'About', 'Our Mission', 'Vision'
       ]
     },
     {
@@ -84,9 +82,9 @@ const Footer = () => {
                       marginBottom: '10px',
                       color: '#ffffff',
                       cursor: [
-                        'Contact Us', 'Join Us',   'About' ,
-                      'Our Mission' ,
-                        'Vision' , 'Business',
+                        'Contact Us', 'Join Us', 'About',
+                        'Our Mission',
+                        'Vision', 'Business',
                         'ECG (Electrocardiograph)', 'Multipara Monitor', 'Cardiotocography',
                         'Auto Hematology Analyzer', 'Portable Ultrasound Machine'
                       ].includes(item) ? 'pointer' : 'default'
@@ -125,7 +123,7 @@ const Footer = () => {
             <a href="https://www.facebook.com/mindronmeditech" target="_blank" rel="noopener noreferrer">
               <img src={FacebookIcon} alt="Facebook" style={{ width: '32px', height: '32px' }} />
             </a>
-            <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/Mindrommtech" target="_blank" rel="noopener noreferrer">
               <img src={TwitterIcon} alt="Twitter" style={{ width: '32px', height: '32px' }} />
             </a>
             <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">

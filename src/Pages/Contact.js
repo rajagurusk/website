@@ -8,8 +8,6 @@ import ContactImage from '../Images/contact.jpg';
 import PhoneIcon from '../Images/phone.png';
 import EmailIcon from '../Images/email.png';
 import AddressIcon from '../Images/address.png';
-import ExtraImage from '../Images/leftcontact.png';
-import BottomBanner from '../Images/footerbanner.png';
 import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
@@ -38,7 +36,6 @@ const Contact = () => {
       });
 
       const text = await res.text();
-      console.log('Server response:', text);
 
       try {
         const json = JSON.parse(text);
@@ -49,18 +46,16 @@ const Contact = () => {
           alert(`❌ Error: ${json.error || 'Unknown error'}`);
         }
       } catch (parseErr) {
-        console.error('JSON parse error:', parseErr);
         alert('❌ Unexpected server response');
       }
     } catch (err) {
-      console.error('Submit error:', err);
       alert("❌ Something went wrong while submitting the form.");
     }
   };
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
-    
+
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -77,22 +72,27 @@ const Contact = () => {
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    height: isMobile ? '50vh' : '80vh',
-    backgroundColor: '#f9f9f9',
+    height: isMobile ? '30vh' : '90vh',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden',
+    minHeight: isMobile ? '30vh' : '400px',
+    maxHeight: '100vh',
   };
 
-     const imageStyle = {
-      width: '100%',
-      height: '100%',
-      objectfit: 'contain',
-      borderRadius: '8px',
-      position: 'absolute',
-      bottom: '0', // Make the bottom aligned with the container's bottom
-      left: '0',
-    };
+  const imageStyle = {
+    width: '100%',
+    height: '100%',
+  objectFit: 'fill', // ✅ Corrected spelling
+    borderRadius: '8px',
+    position: 'absolute',
+    bottom: '0',
+    left: '0',
+  };
 
   const knowMoreButtonStyle = {
     position: 'absolute',
@@ -138,7 +138,8 @@ const Contact = () => {
     alignItems: 'flex-start',
     fontSize: isMobile ? '16px' : '18px',
     color: '#000000',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    fontFamily: 'sans-serif'
   };
 
   const iconStyle = {
@@ -151,6 +152,8 @@ const Contact = () => {
   const formContainerStyle = {
     padding: isMobile ? '20px 0' : '30px 10%',
     marginTop: isMobile ? '0' : '-120px',
+      boxSizing: 'border-box' // ✅ Add this
+
   };
 
   const formStyle = {
@@ -185,7 +188,9 @@ const Contact = () => {
     borderRadius: '4px',
     border: '1px solid #ccc',
     width: '100%',
-    minWidth: isMobile ? '100%' : 'auto'
+    minWidth: isMobile ? '100%' : 'auto',
+      boxSizing: 'border-box' // ✅ Important for layout
+
   };
 
   const textAreaStyle = {
@@ -231,7 +236,7 @@ const Contact = () => {
     width: '100%',
     height: isMobile ? '300px' : '500px',
     objectFit: 'contain',
-    transform: isMobile ? 'scaleX(1)' : 'scaleX(1.5)',
+    transform: isMobile ? 'scaleX(1.1)' : 'scaleX(1.5)',
     transformOrigin: 'center',
     marginTop: isMobile ? '0' : '-50px',
     display: 'block',
@@ -259,10 +264,11 @@ const Contact = () => {
 
   const footerStyle = {
     backgroundColor: '#003366',
-    padding: isMobile ? '20px 5%' : '40px 5%',
+    padding: isMobile ? '10px 5% 20px' : '20px 5% 30px', // reduced top & bottom padding
     color: '#fff',
-    overflowX: 'auto',
-    gap: isMobile ? '20px' : '50px'
+    overflowX: 'hidden', // change from 'auto' to 'hidden' to prevent scrollbars
+    gap: isMobile ? '20px' : '50px',
+    marginBottom: '0', // Prevent trailing space
   };
 
   const footerContentStyle = {
@@ -270,7 +276,7 @@ const Contact = () => {
     flexDirection: isMobile ? 'column' : 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: isMobile ? '20px' : '40px'
+    gap: isMobile ? '20px' : '50px'
   };
 
   const locationInfoStyle = {
@@ -339,48 +345,48 @@ const Contact = () => {
         <div style={contactDetailsStyle}>
           <div style={contactDetailStyle}>
             <img
-              data-aos="fade-right"
+              // data-aos="fade-right"
               data-aos-duration="1000"
               src={PhoneIcon}
               alt="Phone"
               style={iconStyle}
             />
-            <div data-aos="fade-right" data-aos-duration="1000">
+            <div >
               022 4516 6539 <br /> +91 86559 72632 <br />+91 86559 72633
             </div>
           </div>
           <div style={contactDetailStyle}>
             <img
-              data-aos="fade-right"
+              // data-aos="fade-right"
               data-aos-duration="1000"
               src={EmailIcon}
               alt="Email"
               style={iconStyle}
             />
-            <div data-aos="fade-right" data-aos-duration="1000">
+            <div >
               info@mindronmeditech.com
             </div>
           </div>
           <div style={contactDetailStyle}>
             <img
-              data-aos="fade-right"
+              // data-aos="fade-right"
               data-aos-duration="1000"
               src={AddressIcon}
               alt="Address"
               style={iconStyle}
             />
-            <div data-aos="fade-right" data-aos-duration="1000">
-  <strong>Mindron Meditech Private Limited</strong><br />
-  <span style={{ fontSize: '15px' }}>
-    Unit No. 218, 2nd Floor, D Block, Agra Road Industrial Premises Co-op. Society Ltd., Amrut Nagar Road, Ghatkopar West, Mumbai - 400086, India
-  </span>
-</div>
+            <div >
+              <strong>Mindron Meditech Private Limited</strong><br />
+              <span style={{ fontSize: '15px' }}>
+                Unit No. 218, 2nd Floor, D Block, Agra Road Industrial Premises Co-op. Society Ltd., Amrut Nagar Road, Ghatkopar West, Mumbai - 400086, India
+              </span>
+            </div>
 
 
           </div>
           <div
-            data-aos="fade-left"
-            data-aos-duration="1000"
+            // data-aos="fade-left"
+            // data-aos-duration="1000"
             style={mapContainerStyle}
           >
             <iframe
@@ -644,13 +650,13 @@ New York, NY 10036, USA.`,
                 <a href="https://www.facebook.com/mindronmeditech" target="_blank" rel="noopener noreferrer">
                   <img src={FacebookIcon} alt="Facebook" style={socialIconStyle} />
                 </a>
-                <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
+                <a href="https://twitter.com/Mindrommtech" target="_blank" rel="noopener noreferrer">
                   <img src={TwitterIcon} alt="Twitter" style={socialIconStyle} />
                 </a>
                 <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">
                   <img src={LinkedInIcon} alt="LinkedIn" style={{ ...socialIconStyle, width: isMobile ? '32px' : '36px', height: isMobile ? '32px' : '36px' }} />
                 </a>
-                <a href="https://www.instagram.com/mindronmeditech/#" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/mindronmeditech/" target="_blank" rel="noopener noreferrer">
                   <img src={InstagramIcon} alt="Instagram" style={socialIconStyle} />
                 </a>
               </div>
@@ -659,6 +665,7 @@ New York, NY 10036, USA.`,
         </div>
       </div>
     </>
+
   );
 };
 

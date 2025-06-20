@@ -66,9 +66,16 @@ const Navbar = () => {
 >
 
         <div className="nav-left">
-          <img src={HomeIcon} alt="Home" style={imgStyle} onClick={() => navigate('/')} />
-                  <span className="menu-icon" onClick={toggleMenu}>&#9776;</span>
-
+<img
+  src={HomeIcon}
+  alt="Home"
+  className="logo-img"
+  style={imgStyle}
+  onClick={() => navigate('/')}
+/>
+<div className="nav-right">
+    <span className="menu-icon" onClick={toggleMenu}>&#9776;</span>
+  </div>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li>
               <NavLink to="/" className={`nav-link-text ${location.pathname === '/' ? 'active' : ''}`} onClick={closeMenu}>HOME</NavLink>

@@ -4,7 +4,7 @@ html, body {
   overflow-x: hidden;
   width: 100%;
     box-sizing: border-box;
-      font-family: 'Merriweather ', sans-serif;
+      font-family: sans-serif;
 
 }
 .App {
@@ -44,4 +44,14 @@ html, body {
   to {
     transform: rotate(360deg);
   }
+}
+@font-face {
+  font-family: 'FranklinGothicURW';
+  src: url('./fonts/FranklinGothicURW.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'FranklinGothicURW', sans-serif !important;
 }

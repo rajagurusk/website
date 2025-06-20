@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
-import ultrasoundMain from '../Images/Portable Ultrasound Machine.jpg';
-import ultrasoundAlt from '../Images/USG.jpg'; // Add your second product image here
-import heroImage from '../Images/ultrahero.jpg'; // ✅ Hero image
-import Footer from '../Pages/Footer'; // Adjust the path based on your folder structure
+import React, { useState,useEffect,useLayoutEffect } from 'react';
+import ultrasoundMain from '../Images/USG.jpg';
+import ultrasoundAlt from '../Images/Portable Ultrasound Machine.jpg';
+import heroImage from '../Images/ultrahero.jpg';
+import Footer from '../Pages/Footer';
 
 
 
 const imageDetails = {
-  [ultrasoundMain]: {
+  [ultrasoundAlt]: {
     heading: ' Ultrasound Scanning Machine (Portable Series)',
     title: 'Model - MM CD 200',
     // description:
     //   'The MM CD 200 is designed for easy mobility while delivering high-resolution ultrasound imaging across a range of clinical settings.',
-    // sections: {
-    // Feature: [
-    //   'High-frequency transducer compatibility',
-    //   'Lightweight and battery-operated',
-    //   'Color Doppler imaging support',
-    //   'Ideal for emergency and bedside use',
-    // ],
     sections: {
       Feature: [
         'TAI Tissue Adaptive Imaging',
@@ -62,33 +55,9 @@ const imageDetails = {
         'Brightness adjustable'
 
       ],
-      // 'Advanced Technique and Features': [
-      //   'TAI Tissue Adaptive Imaging',
-      //   'eSRI Adaptive Speckle Reduction Imaging',
-      //   'Frequency Compounding Imaging',
-      //   'Adaptive Spatial Compounding Imaging',
-      //   'Harmonic Imaging',
-      //   'B mode Auto Optimization',
-      //   'Digital Multi-Beam forming',
-      //   'Trapezoid Imaging',
-      //   'Adaptive Doppler imaging',
-      //   'Spectrum Enhancement',
-      //   'B Steer',
-      //   'Digital Zoom',
-      //   'Auto Doppler trace'
-
-      // ],
-      // 'Imaging Modes': [
-      //   'B-mode',
-      //   'M-mode',
-      //   'Color Doppler',
-      //   'PDI/DPDI',
-      //   'PW Doppler',
-      //   'CW Doppler'
-      // ],
     },
   },
-  [ultrasoundAlt]: {
+  [ultrasoundMain]: {
     heading: 'Ultrasound Scanning Machine (Trolley Based)',
     title: 'Model - MM CD 100',
     // description:
@@ -175,6 +144,23 @@ const PortableUltrasoundMachineDetail = () => {
   const [mainImage, setMainImage] = useState(ultrasoundMain);
   const [relatedImages, setRelatedImages] = useState(allImages.filter((img) => img !== ultrasoundMain));
   const [activeSection, setActiveSection] = useState('Feature');
+const [isMobile, setIsMobile] = useState(false);
+
+useLayoutEffect(() => {
+  const checkWidth = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  checkWidth(); // Initial check BEFORE first paint
+}, []);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   const handleImageClick = (clickedImage) => {
     setMainImage(clickedImage);
@@ -183,20 +169,32 @@ const PortableUltrasoundMachineDetail = () => {
   };
 
   return (
-    <div style={{ padding: '0px', fontFamily: 'Merriweather , sans-serif' }}>
+    <div style={{ padding: '0px', fontFamily: 'sans-serif' }}>
       {/* ✅ Hero Section */}
-      <div style={{ height: '600px', width: '100%', position: 'relative', marginBottom: '40px' }}>
-        <img
-          src={heroImage}
-          alt="Hero"
-          style={{
-            objectFit: 'fill',
-            objectPosition: 'bottom',
-            width: '100%',
-            height: '100%',
-            borderRadius: '10px',
-          }}
-        />
+   <div
+  style={{
+    height: isMobile ? '30vh' : '90vh',
+    width: '100%',
+    position: 'relative',
+    marginBottom: '40px',
+    borderRadius: '10px',
+    overflow: 'hidden',
+  }}
+>
+  <img
+    src={heroImage}
+    alt="Hero"
+    style={{
+      objectFit: 'fill',
+      objectPosition: 'center',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+    }}
+  />
+
+
+
         <div
           style={{
             position: 'absolute',
@@ -211,7 +209,6 @@ const PortableUltrasoundMachineDetail = () => {
             fontSize: '2rem',
             fontWeight: 'bold',
             borderRadius: '10px',
-            // backgroundColor: 'rgba(0, 0, 0, 0.4)' // Optional overlay for contrast
           }}
         >
         </div>

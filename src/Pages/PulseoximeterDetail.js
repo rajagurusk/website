@@ -1,14 +1,12 @@
-// src/Pages/PulseoximeterDetail.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import pulseMain from '../Images/pulsetabletop.jpg';
-import pulseAlt from '../Images/pulsefinger.jpg'; // Add your second image
-// import Footer from '../Pages/Footer'; // Adjust the path based on your folder structure
+import pulseAlt from '../Images/pulsefinger.jpg';
 import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
 import InstagramIcon from '../Images/instagram.png';
-import PulseHeaderImage from '../Images/volumepage1.jpg'; // ✅ Add your hero image
+import PulseHeaderImage from '../Images/volumepage1.jpg';
 
 
 
@@ -18,7 +16,7 @@ const imageDetails = {
     title: 'Model : MT 01 PLUS',
     // description: 'A compact and precise pulse oximeter designed for both home and clinical use.',
     sections: {
-       Feature : [
+      Feature: [
         'SpO2 range: 1% to 100%',
         'Pulse rate: 20 to 250 bpm',
         'Pulse amplitude: 0.03% to 20%',
@@ -28,7 +26,7 @@ const imageDetails = {
         'Neonate: 70% to 100% ± 3 digits',
         'Low perfusion: ± 3 digits for 20 to 250 bpm',
       ],
-     ' Electrical': [
+      ' Electrical': [
         'Power requirements: 100 to 240 VAC, 50/60Hz, 45 VA',
         'Fuse rating: Fast-acting 2A 32VAC/DC and 500mA 32VAC/50DC',
       ],
@@ -46,12 +44,6 @@ const imageDetails = {
         'Weight: 1.6 kg (3.5 lbs)',
         'Size: 82 H × 255 W × 165 D (mm)',
       ],
-      // 'Equipment Compliance': [
-      //   'EN ISO 9919:2009, EN ISO 80601-2-61:2011',
-      //   'EN IEC 60601-1:2005 & amendments',
-      //   'CAN/CSA C22.2 No. 601.1 M90',
-      //   'UL 60601-1: 1st edition',
-      // ],
       'Equipment Classification': [
         'Electric Shock Protection: Class I (internally powered)',
         'Type BF – Applied part',
@@ -80,7 +72,7 @@ const imageDetails = {
     },
   },
 
-  
+
   [pulseAlt]: {
     heading: 'Fingertip Pulse Oximete',
     title: 'Model : MT 100',
@@ -93,10 +85,10 @@ const imageDetails = {
       ],
       'Technical Specification': [
         'MEASUREMENT FEATURES: Displays blood oxygen saturation (SpO2) levels and pulse rate with bright LED screen for easy reading',
- 'PORTABLE DESIGN: Compact and lightweight construction makes it perfect for children to carry and use',
-'OPERATION: Simple one-button operation with automatic power-off feature after 8 seconds of inactivity',
-'DISPLAY CLARITY: Multi-directional display shows readings in different orientations for convenient viewing',
-'POWER SOURCE: Operates on 2 AAA batteries (not included) with low battery indicator for timely replacement'
+        'PORTABLE DESIGN: Compact and lightweight construction makes it perfect for children to carry and use',
+        'OPERATION: Simple one-button operation with automatic power-off feature after 8 seconds of inactivity',
+        'DISPLAY CLARITY: Multi-directional display shows readings in different orientations for convenient viewing',
+        'POWER SOURCE: Operates on 2 AAA batteries (not included) with low battery indicator for timely replacement'
       ]
     },
   },
@@ -116,58 +108,45 @@ const PulseoximeterDetail = () => {
   };
 
   return (
-    
- <div style={{ padding: '10px' }}>
-      
+
+    <div style={{ padding: '10px' , fontFamily: 'sans-serif' }}>
+
       {/* ✅ Hero/Header Section */}
       <div style={{
         position: 'relative',
         width: '100vw',
-          marginLeft: 'calc(-50vw + 50%)',
+        marginLeft: 'calc(-50vw + 50%)',
         height: '600px',
         backgroundImage: `url(${PulseHeaderImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        borderRadius: '0 0 20px 20px'
+        borderRadius: '0 0 20px 20px',
       }}>
-        {/* <div style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '60px',
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
-          padding: '20px 30px',
-          borderRadius: '12px'
-        }}> */}
-          {/* <h1 style={{ color: '#fff', margin: 0, fontSize: '2.5rem' }}>Pulse Oximeter</h1>
-          <p style={{ color: '#eee', marginTop: '8px', fontSize: '1.1rem' }}>
-            Accurate monitoring for SpO2 & Pulse in clinical and home settings.
-          </p> */}
-        {/* </div> */}
       </div>
-            <h1>{imageDetails[mainImage]?.heading || 'Pulse Oximeter'}</h1>
+      <h1>{imageDetails[mainImage]?.heading || 'Pulse Oximeter'}</h1>
 
-<div
-  style={{
-    display: 'flex',
-    flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-    marginTop: '30px',
-    gap: '30px',
-    flexWrap: 'wrap',
-    padding: '0 20px',
-  }}
->           {/* Left: Image */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: window.innerWidth < 768 ? 'column' : 'row',
+          marginTop: '30px',
+          gap: '30px',
+          flexWrap: 'wrap',
+          padding: '0 20px',
+        }}
+      >           {/* Left: Image */}
         <div style={{ padding: '0px 20px', flex: '1', minWidth: '300px' }}>
           <img
             src={mainImage}
             alt="Pulse Oximeter"
-style={{
-  maxWidth: '100%',
-  width: '100%',
-  borderRadius: '10px',
-  objectFit: 'contain',
-  display: 'block',
-  margin: '0 auto',
-}}
+            style={{
+              maxWidth: '100%',
+              width: '100%',
+              borderRadius: '10px',
+              objectFit: 'contain',
+              display: 'block',
+              margin: '0 auto',
+            }}
           />
         </div>
 
@@ -205,62 +184,62 @@ style={{
       </div>
 
       {/* Related Products */}
-       <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-  <h3>Related Products</h3>
-  <div
-    style={{
-      display: 'flex',
-      gap: '20px',
-      marginTop: '20px',
-      overflowX: 'auto',
-      paddingBottom: '10px',
-    }}
-  >
-    {relatedImages.map((img, index) => (
-      <div
-        key={index}
-        style={{
-          textAlign: 'center',
-          minWidth: '200px',
-          flexShrink: 0,
-        }}
-      >
-        <img
-          src={img}
-          alt={`Related ${index}`}
+      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
+        <h3>Related Products</h3>
+        <div
           style={{
-            width: '200px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            border: '2px solid #ccc',
-            transition: 'transform 0.3s ease',
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-          onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          onClick={() => handleImageClick(img)}
-        />
-        <p style={{ marginTop: '8px', fontSize: '14px', color: '#333' }}>
-  {imageDetails[img]?.heading || `Product ${index + 1}`}
-</p>
-
-      </div>
-    ))}
-  </div>
-</div>
-
-{/* Bottom Banner Section */}
-           <div style={{
-          backgroundColor: '#003366', padding: '40px 5.8%', color: '#fff', overflowX: 'auto',
-          width: '100%',
-          marginLeft: 'calc(-50vw + 50%)', // pull left to align full width
-          marginRight: 'calc(-50vw + 50%)',// pull right to align full width
-        }}>
-          <div style={{
             display: 'flex',
-            flexWrap: 'wrap',
-    justifyContent: 'center', // center columns
-            gap: '300px'
-          }}>
+            gap: '20px',
+            marginTop: '20px',
+            overflowX: 'auto',
+            paddingBottom: '10px',
+          }}
+        >
+          {relatedImages.map((img, index) => (
+            <div
+              key={index}
+              style={{
+                textAlign: 'center',
+                minWidth: '200px',
+                flexShrink: 0,
+              }}
+            >
+              <img
+                src={img}
+                alt={`Related ${index}`}
+                style={{
+                  width: '200px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: '2px solid #ccc',
+                  transition: 'transform 0.3s ease',
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                onClick={() => handleImageClick(img)}
+              />
+              <p style={{ marginTop: '8px', fontSize: '14px', color: '#333' }}>
+                {imageDetails[img]?.heading || `Product ${index + 1}`}
+              </p>
+
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Banner Section */}
+      <div style={{
+        backgroundColor: '#003366', padding: '40px 5.8%', color: '#fff', overflowX: 'auto',
+        width: '100%',
+        marginLeft: 'calc(-50vw + 50%)',
+        marginRight: 'calc(-50vw + 50%)',
+      }}>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '300px'
+        }}>
           {[
             {
               title: 'Products',
@@ -269,12 +248,11 @@ style={{
                 'Multipara Monitor',
                 'Cardiotocography',
                 'Auto Hematology Analyzer',
-                'Magnetic Resonance Pancreatography',
                 'Portable Ultrasound Machine '
               ]
 
             },
-            
+
             {
               title: 'About Us',
               items: [
@@ -302,7 +280,7 @@ style={{
                       cursor:
                         item === 'Contact Us' ||
                           item === 'Join Us' ||
-                           item === 'About' ||
+                          item === 'About' ||
                           item === 'Our Mission' ||
                           item === 'Vision' ||
                           item === 'Business' ||
@@ -311,18 +289,7 @@ style={{
                           item === 'Multipara Monitor' ||
                           item === 'Cardiotocography' ||
                           item === 'Auto Hematology Analyzer' ||
-                          item === 'Magnetic Resonance Pancreatography' ||
                           item === 'Portable Ultrasound Machine '
-                          // item === 'ECG (Electrocardiograph)' ||
-                          // item === 'BPL Monitor' ||
-                          // item === 'Pathology' ||
-                          // item === 'Defibrillator' ||
-                          // item === 'Syringe Infusion Pump' ||
-                          // item === 'Volumetric Infusion Pump' ||
-                          // item === 'Baby Warmer' ||
-                          // item === 'Suction Machine' ||
-                          // item === 'Pulse Oximeter' ||
-                          // item === 'Echo Ultrasound'
                           ? 'pointer'
                           : 'default'
                     }}
@@ -333,18 +300,7 @@ style={{
                         'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
                         'Cardiotocography': '/products/cardiotocography',
                         'Auto Hematology Analyzer': '/products/autohematologyanalyzer',
-                        'Magnetic Resonance Pancreatography': '/products/mrp',
                         'Portable Ultrasound Machine': '/products/portableultrasoundmachine',
-                        // 'ECG (Electrocardiograph)': '/products/ecg',
-                        // 'BPL Monitor': '/products/bplmonitor',
-                        // 'Pathology': '/products/pathology',
-                        // 'Defibrillator': '/products/defibrillator',
-                        // 'Syringe Infusion Pump': '/products/syringeInfusionpump',
-                        // 'Volumetric Infusion Pump': '/products/volumericInfusionpump',
-                        // 'Baby Warmer': '/products/babywarmer',
-                        // 'Suction Machine': '/products/suctionmachine',
-                        // 'Pulse Oximeter': '/products/pulseoximeter',
-                        // 'Echo Ultrasound': '/products/ecoultrasound',
                       };
 
                       if (productMap[item]) {
@@ -354,9 +310,9 @@ style={{
                         navigate('/contact');
                         window.scrollTo({ top: 600, behavior: 'smooth' });
                       } else if (
-                         item === 'About' ||
+                        item === 'About' ||
                         item === 'Our Mission' ||
-                        item === 'Vision' 
+                        item === 'Vision'
                       ) {
                         const sectionKey = item.toLowerCase().replace(/\s+/g, '');
                         navigate('/about', { state: { scrollTo: sectionKey } });
@@ -376,21 +332,21 @@ style={{
 
       {/* Secondary Footer */}
       <div style={{
-  backgroundColor: '#001933',
-  color: '#fff',
-  padding: '45px 80px 50px 100px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  flexWrap: 'wrap',
-  fontSize: '16px',
-  width: '100vw',
-  position: 'relative',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  boxSizing: 'border-box',
-  overflowX: 'hidden',
-}}>
+        backgroundColor: '#001933',
+        color: '#fff',
+        padding: '45px 80px 50px 100px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        fontSize: '16px',
+        width: '100vw',
+        position: 'relative',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        boxSizing: 'border-box',
+        overflowX: 'hidden',
+      }}>
 
 
         {/* Left Side */}
@@ -407,7 +363,7 @@ style={{
             <a href="https://www.facebook.com/mindronmeditech" target="_blank" rel="noopener noreferrer">
               <img src={FacebookIcon} alt="Facebook" style={{ width: '32px', height: '32px' }} />
             </a>
-            <a href="https://x.com/i/flow/login?redirect_after_login=%2FMindron228025" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/Mindrommtech" target="_blank" rel="noopener noreferrer">
               <img src={TwitterIcon} alt="Twitter" style={{ width: '32px', height: '32px' }} />
             </a>
             <a href="https://www.linkedin.com/in/mindron-meditech-53b2b9370/" target="_blank" rel="noopener noreferrer">

@@ -1,8 +1,7 @@
-// src/Pages/CardiotocographyDetail.js
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ottMain from '../Images/ott.jpg';
-import heroImage from '../Images/ottpage.jpg'; // ✅ Hero image
-import Footer from './Footer'; // Adjust the path based on your folder structure
+import heroImage from '../Images/ottpage.jpg';
+import Footer from './Footer';
 
 
 const imageDetails = {
@@ -45,22 +44,44 @@ const imageDetails = {
 
 const OTTdetail = () => {
     const [activeSection, setActiveSection] = useState('Feature');
+const [isMobile, setIsMobile] = useState(false);
+
+useLayoutEffect(() => {
+  const checkWidth = () => setIsMobile(window.innerWidth <= 768);
+  checkWidth(); // runs before paint
+}, []);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
     return (
-        <div style={{ padding: '0px' }}>
+        <div style={{ padding: '0px' , fontFamily: 'sans-serif' }}>
             {/* ✅ Hero Section */}
-            <div style={{ height: '600px', width: '100%', position: 'relative', marginBottom: '40px' }}>
+<div
+  style={{
+    height: isMobile ? '30vh' : '90vh',
+    width: '100%',
+    position: 'relative',
+    marginBottom: '40px',
+    borderRadius: '10px',
+    overflow: 'hidden',
+  }}
+>
                 <img
-                    src={heroImage}
-                    alt="Hero"
-                    style={{
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                        width: '100%',
-                        height: '100%',
-                        borderRadius: '10px',
-                    }}
-                />
+  src={heroImage}
+  alt="Hero"
+  style={{
+    objectFit: 'fill',
+    objectPosition: 'center',
+    width: '100%',
+    height: '100%',
+    display: 'block',
+  }}
+/>
+
                 <div
                     style={{
                         position: 'absolute',
@@ -75,7 +96,6 @@ const OTTdetail = () => {
                         fontSize: '2rem',
                         fontWeight: 'bold',
                         borderRadius: '10px',
-                        // backgroundColor: 'rgba(0, 0, 0, 0.4)' // Optional overlay for contrast
                     }}
                 >
                     {/* Portable Ultrasound Machines */}
