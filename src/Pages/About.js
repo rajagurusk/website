@@ -45,7 +45,7 @@ minHeight: isMobile ? '30vh' : '400px',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    minHeight: isMobile ? '30vh' : '400px',
+    // minHeight: isMobile ? '30vh' : '400px',
     // maxHeight: '100vh',
   };
   const imageStyle = {
