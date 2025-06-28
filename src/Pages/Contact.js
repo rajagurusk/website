@@ -20,16 +20,17 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
-      firstName: e.target.firstName.value,
-      lastName: e.target.lastName.value,
-      email: e.target.email.value,
-      phone: e.target.phone.value,
-      message: e.target.message.value
-    };
+const data = {
+  name: `${e.target.firstName.value} ${e.target.lastName.value}`,
+  email: e.target.email.value,
+  message: e.target.message.value,
+  phone: e.target.phone.value
+
+};
+
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
