@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import monitorMain from '../Images/multiparamonitor.jpeg';
 import monitorAlt from '../Images/multilowend.jpeg';
 import image2 from '../Images/multihigh2.jpeg';
-import heroImage from '../Images/multimonitorpage.jpg';
+import heroImage from '../Images/multimonitorpage.jpeg';
 import Footer from '../Pages/Footer';
 
 const imageDetails = {
