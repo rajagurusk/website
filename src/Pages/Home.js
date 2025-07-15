@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Pages/style.css';
 
-import Image1 from '../Images/home2.jpg';
+import Image1 from '../Images/home2.png';
 import Image2 from '../Images/home1.jpg';
 import Image3 from '../Images/home3.jpg';
 import Image4 from '../Images/home4.jpg';
