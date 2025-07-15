@@ -1,27 +1,13 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import ecgMain from '../Images/ecg1.jpg';
-import ecg1 from '../Images/mrp6000.jpg';
-import ecg2 from '../Images/ecg60.jpg';
-import ecg3 from '../Images/ecg18.jpg';
+import ecgMain from '../Images/ecg18.jpeg';
+import ecg1 from '../Images/mrp6000.jpeg';
+import ecg2 from '../Images/ecg60.jpeg';
+import ecg3 from '../Images/ecg1.jpeg';
 import heroImage from '../Images/ecgproduct.jpg';
 import Footer from '../Pages/Footer';
 
 const imageDetails = {
-  [ecgMain]: {
-    heading: '12 Channel ECG Machine',
-    title: 'Model: MT ECG 120',
-    // description: 'Our cutting-edge ECG system delivers accurate and real-time heart monitoring...',
-    sections: {
-      Feature: [
-        'Colorful HD Display screen: The 10.1-inch full fit color touch screen with a resolution of up to 1280×800 provides users with good visual effects, richer display content, clearer waveforms, and more reliable results.',
-        'Touch + Button Operation: The button + touch combination realizes fast, intuitive and concise operation, allowing users to experience a true "what you want is what you get" interface. Soft silicone buttons provide a comfortable touch.',
-        'Powerful Data Management: Built-in large-capacity memory can store at least 4000 medical records. Supports export in various electronic file formats with a convenient and fast operation interface.',
-        'Ergonomic Handle Design: Optimized handle offers better grip and user comfort.',
-        'External Equipment Support: Compatible with external USB keyboard, mouse, barcode scanner, printer, ID card reader, etc.',
-        'High Precision Measurement: Offers 24-bit sampling accuracy and 32kHz sampling frequency, delivering more accurate waveforms and reliable analysis results.',
-      ],
-    },
-  },
+  
 
   [ecg2]: {
     heading: '3 Channel ECG Machine',
@@ -61,7 +47,7 @@ const imageDetails = {
       ]
     },
   },
-  [ecg3]: {
+  [ecgMain]: {
     heading: '18 Channel ECG Machine',
     title: 'Model: MT ECG 180',
     description: 'The device is an electrocardiograph which can collect 18-lead ECG signal simultaneously and print ECG waveform with thermal printing system. It features in, recording and displaying ECG waveform in auto / manual mode; measuring, analyzing and diagnosing ECG waveform parameters automatically; prompting for "Lead off" and "Lack of paper"; built-in lithium battery, AC / DC; selecting rhythm lead freely to observe abnormal heart rhythm; case database management.',
@@ -88,6 +74,21 @@ const imageDetails = {
 
 
 
+    },
+  },
+  [ecg3]: {
+    heading: '12 Channel ECG Machine',
+    title: 'Model: MT ECG 120',
+    // description: 'Our cutting-edge ECG system delivers accurate and real-time heart monitoring...',
+    sections: {
+      Feature: [
+        'Colorful HD Display screen: The 10.1-inch full fit color touch screen with a resolution of up to 1280×800 provides users with good visual effects, richer display content, clearer waveforms, and more reliable results.',
+        'Touch + Button Operation: The button + touch combination realizes fast, intuitive and concise operation, allowing users to experience a true "what you want is what you get" interface. Soft silicone buttons provide a comfortable touch.',
+        'Powerful Data Management: Built-in large-capacity memory can store at least 4000 medical records. Supports export in various electronic file formats with a convenient and fast operation interface.',
+        'Ergonomic Handle Design: Optimized handle offers better grip and user comfort.',
+        'External Equipment Support: Compatible with external USB keyboard, mouse, barcode scanner, printer, ID card reader, etc.',
+        'High Precision Measurement: Offers 24-bit sampling accuracy and 32kHz sampling frequency, delivering more accurate waveforms and reliable analysis results.',
+      ],
     },
   },
 };

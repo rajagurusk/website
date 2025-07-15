@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import pump1 from '../Images/syringeinjection.jpeg';
-import pump2 from '../Images/volumeinjection.png';
+import pump2 from '../Images/volumeinjection.jpeg';
 import HeaderImage from '../Images/injectionpage.jpg';
 
 import FacebookIcon from '../Images/facebook.png';

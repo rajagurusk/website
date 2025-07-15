@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Pages/style.css';
 
-import Image1 from '../Images/home2.png';
+import Image1 from '../Images/home2.jpg';
 import Image2 from '../Images/home1.jpg';
 import Image3 from '../Images/home3.jpg';
 import Image4 from '../Images/home4.jpg';
@@ -13,11 +13,11 @@ import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
 import InstagramIcon from '../Images/instagram.png';
-import Product2 from '../Images/ecg1.jpg';
-import Product3 from '../Images/ctg.jpg';
-import Product4 from '../Images/multiparamonitor.jpg';
+import Product2 from '../Images/ecg18.jpeg';
+import Product3 from '../Images/ctg.jpeg';
+import Product4 from '../Images/multiparamonitor.jpeg';
 import Product5 from '../Images/USG.jpg';
-import Product6 from '../Images/pulsefinger.jpg'
+import Product6 from '../Images/pulsefinger.jpeg'
 
 const Home = () => {
   const images = [Image1, Image2, Image3, Image4];

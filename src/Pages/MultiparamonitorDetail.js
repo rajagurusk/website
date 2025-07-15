@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import monitorMain from '../Images/multiparamonitor.jpg';
-import monitorAlt from '../Images/multilowend.jpg';
+import monitorMain from '../Images/multiparamonitor.jpeg';
+import monitorAlt from '../Images/multilowend.jpeg';
 import image2 from '../Images/multihigh2.jpeg';
 import heroImage from '../Images/multimonitorpage.jpg';
 import Footer from '../Pages/Footer';
@@ -125,7 +125,7 @@ useEffect(() => {
   alt="Hero"
   style={{
     objectFit: 'cover',
-    objectPosition: 'center',
+    objectPosition: 'top',
     width: '100%',
     height: '100%',
     display: 'block',

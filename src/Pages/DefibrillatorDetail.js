@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import defibMain from '../Images/defibrillator.jpg';
+import defibMain from '../Images/defibrillator.jpeg';
 import heroImage from '../Images/defibrilatorpage.jpg';
 import Footer from '../Pages/Footer';
 

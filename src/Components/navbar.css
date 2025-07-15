@@ -1,85 +1,94 @@
+/* navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #005bab;
-  padding: 10px 20px;
-  position: relative;
-}
-.logo-img {
-  display: block;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
+  padding: 1rem 1.5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
 }
 
-.nav-right {
+.nav-content {
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-left: auto; /* pushes it to the far right */
+  justify-content: flex-start; /* ✅ Align all to the left */
+  position: relative;
+}
+
+.logo-img {
+  height: 80px;
+  width: auto;
+    margin-right: 60px; /* 👈 adds space between logo and links */
+
 }
 
 .menu-icon {
   font-size: 28px;
   cursor: pointer;
-  display: none;
-  color: white;
+  color:#001f54;
+  display: none; /* will be overridden in mobile view */
 }
 
-/* Menu list */
 .nav-links {
-  display: flex;
-  gap: 20px;
   list-style: none;
+  display: flex;
+  gap: 60px;
   margin: 0;
   padding: 0;
 }
 
-.nav-links li a {
-  color: white;
+.nav-link-text {
+  color: #001f54;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
+.nav-link-text:hover,
+.nav-link-text.active {
+  border-bottom: 2px solid #001f54;
+}
+
+/* 🔻 Mobile View */
 @media (max-width: 768px) {
   .menu-icon {
     display: block;
-  }
- 
-  .logo-img {
-    display: none;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    z-index: 1001;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #001f54;
     position: absolute;
-    top: 0; /* Align to top */
-    left: 0;
-    height: 100vh; /* Full screen height */
-    width: 100%;
-    justify-content: center; /* vertically center */
-    align-items: center;     /* horizontally center */
-    padding: 0;
-    margin: 0;
-    z-index: 999;
+    top: 100px;
+    right: 10px; /* ✅ aligns to the right */
+    width: 60%;
+    background-color: #001f54;
+    padding: 90px;
+    z-index: 1000;
   }
 
-  .nav-links.active {
+  .nav-links.open {
     display: flex;
   }
 
-  .nav-links li {
-    text-align: center;
-    padding: 15px 0;
-    width: 100%;
+  .nav-link-text {
+    color: white !important;
   }
 
-  .nav-links li a {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
   }
 }

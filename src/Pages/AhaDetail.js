@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import ahaMain from '../Images/AHA.jpg';
-import aha1 from '../Images/AHA1.jpg';
+import ahaMain from '../Images/AHA.jpeg';
+import aha1 from '../Images/AHA1.jpeg';
 import heroImage from '../Images/hampage.jpg';
 import Footer from '../Pages/Footer';
 

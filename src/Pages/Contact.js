@@ -642,7 +642,7 @@ New York, NY 10036, USA.`,
             <div style={{ flex: '1', minWidth: isMobile ? '100%' : '300px', lineHeight: '1.8' }}>
               <p style={{ margin: '5px 0' }}>📞 <strong>022 4516 6539</strong></p>
               <p style={{ margin: '5px 0' }}>✉️ <strong>info@mindronmeditech.com</strong></p>
-              <p style={{ margin: '5px 0' }}>© 2025 MindronMediTech India Pvt. Ltd. All rights reserved.</p>
+              <p style={{ margin: '5px 0' }}>© 2025 MindronMediTech Pvt. Ltd. All rights reserved.</p>
             </div>
 
             <div style={{ flex: '1', minWidth: isMobile ? '100%' : '300px', textAlign: isMobile ? 'left' : 'right' }}>

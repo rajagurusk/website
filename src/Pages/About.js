@@ -181,7 +181,7 @@ minHeight: isMobile ? '30vh' : '400px',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '24px'
+          gap: '32px'
         }}>
           {/* Image */}
           <img
@@ -192,6 +192,8 @@ minHeight: isMobile ? '30vh' : '400px',
               minWidth: '200px',
               borderRadius: '12px',
               objectFit: 'cover',
+              padding:'10px',
+              marginLeft:'-10px',
             }}
           />
 
@@ -228,7 +230,7 @@ We are backed by a seasoned investor with a strong presence in the Metal, Real E
 Our CEO is a visionary leader who has been instrumental in driving Mindron Meditech’s success, achieving significant milestones including DPIIT, ISO, CE, and CDSCO certifications. With a passion for innovation and excellence, he continues to propel our growth and expand our global impact. Backed by years of industry experience, he brings strategic foresight, operational excellence, and a deep understanding of healthcare technology. His leadership fosters a culture of integrity, continuous improvement, and customer-centric innovation, positioning Mindron Meditech as a trusted name in the medical device industry.              </p>  </div>
 
           {/* Image Right */}
-          <div style={{ flex: '1 1 35%', minWidth: '220px', marginLeft: 'auto', maxWidth: '50px' }}>
+          <div style={{ flex: '1 1 35%', minWidth: '190px', marginLeft: 'auto', maxWidth: '50px' }}>
             <img
               src={require('../Images/ceo.jpg')} // Replace with your actual image path
               alt="CEO"
@@ -237,7 +239,9 @@ Our CEO is a visionary leader who has been instrumental in driving Mindron Medit
                 height: '350px',       // Set desired height
                 maxWidth: '250px',
                 borderRadius: '12px',
-                objectFit: 'cover'
+                objectFit: 'cover',
+                padding:'10px',
+                marginRight:'-10px'
               }}
             />
           </div>

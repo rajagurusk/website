@@ -3,15 +3,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import '../Pages/style.css';
 
 import ProductHeaderImage from '../Images/productpage.jpg';
-import ECGImage from '../Images/ecg1.jpg';
-import MultiParaImage from '../Images/multiparamonitor.jpg';
-import Defibrillator from '../Images/defibrillator.jpg';
+import ECGImage from '../Images/ecg18.jpeg';
+import MultiParaImage from '../Images/multiparamonitor.jpeg';
+import Defibrillator from '../Images/defibrillator.jpeg';
 import SyringeInfusionPump from '../Images/syringeinjection.jpeg';
-import VolumericInfusionPump from '../Images/volumeinjection.png';
-import PulseOximeter from '../Images/pulsetabletop.jpg';
-import Cardiotocography from '../Images/ctg.jpg';
-import AutoHematologyAnalyzer from '../Images/AHA.jpg';
-import MrpDetail from '../Images/mrp6000.jpg';
+import VolumericInfusionPump from '../Images/volumeinjection.jpeg';
+import PulseOximeter from '../Images/pulsetabletop.jpeg';
+import Cardiotocography from '../Images/ctg.jpeg';
+import AutoHematologyAnalyzer from '../Images/AHA.jpeg';
+import MrpDetail from '../Images/mrp6000.jpeg';
 import PortableUltrasoundMachine from '../Images/USG.jpg';
 import OTT from '../Images/ott.jpg'
 

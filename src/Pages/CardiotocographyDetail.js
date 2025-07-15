@@ -1,6 +1,6 @@
 // src/Pages/CardiotocographyDetail.js
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import ctgMain from '../Images/ctg.jpg';
+import ctgMain from '../Images/ctg.jpeg';
 import heroImage from '../Images/ctgpage.jpg';
 import Footer from '../Pages/Footer';
 

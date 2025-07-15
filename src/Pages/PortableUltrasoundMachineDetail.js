@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useLayoutEffect } from 'react';
 import ultrasoundMain from '../Images/USG.jpg';
-import ultrasoundAlt from '../Images/Portable Ultrasound Machine.jpg';
+import ultrasoundAlt from '../Images/Portable Ultrasound Machine.jpeg';
 import heroImage from '../Images/ultrahero.jpg';
 import Footer from '../Pages/Footer';
 

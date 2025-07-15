@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import pulseMain from '../Images/pulsetabletop.jpg';
-import pulseAlt from '../Images/pulsefinger.jpg';
+import pulseMain from '../Images/pulsetabletop.jpeg';
+import pulseAlt from '../Images/pulsefinger.jpeg';
 import FacebookIcon from '../Images/facebook.png';
 import TwitterIcon from '../Images/twitter.png';
 import LinkedInIcon from '../Images/linkedin.png';
@@ -230,7 +230,7 @@ const PulseoximeterDetail = () => {
       {/* Bottom Banner Section */}
       <div style={{
         backgroundColor: '#003366', padding: '40px 5.8%', color: '#fff', overflowX: 'auto',
-        width: '100%',
+        width: '91%',
         marginLeft: 'calc(-50vw + 50%)',
         marginRight: 'calc(-50vw + 50%)',
       }}>
