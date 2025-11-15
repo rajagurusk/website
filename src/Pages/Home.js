@@ -534,18 +534,18 @@ useEffect(() => {
           </div>
 
           {/* Image on the Right */}
-          <img
-            data-aos="fade-left"
-            data-aos-duration="1000"
-            src={require('../Images/aboutushome.jpg')}
-            alt="About Us"
-            style={{
-              width: '40%',
-              minWidth: '250px',
-              borderRadius: '10px',
-              objectFit: 'cover'
-            }}
-          />
+          // <img
+          //   data-aos="fade-left"
+          //   data-aos-duration="1000"
+          //   src={require('../Images/aboutushome.jpg')}
+          //   alt="About Us"
+          //   style={{
+          //     width: '40%',
+          //     minWidth: '250px',
+          //     borderRadius: '10px',
+          //     objectFit: 'cover'
+          //   }}
+          // />
         </div>
         <style>
           {`
