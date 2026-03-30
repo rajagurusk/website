@@ -534,7 +534,7 @@ useEffect(() => {
           </div>
 
           {/* Image on the Right */}
-          // <img
+           {/* <img
           //   data-aos="fade-left"
           //   data-aos-duration="1000"
           //   src={require('../Images/aboutushome.jpg')}
@@ -545,7 +545,7 @@ useEffect(() => {
           //     borderRadius: '10px',
           //     objectFit: 'cover'
           //   }}
-          // />
+          // /> */}
         </div>
         <style>
           {`
