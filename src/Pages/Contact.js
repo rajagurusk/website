@@ -17,44 +17,83 @@ const Contact = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const formData = {
+//       name: `${e.target.firstName.value} ${e.target.lastName.value}`,
+//       email: e.target.email.value,
+//       phone: e.target.phone.value,
+//       message: e.target.message.value,
+//     };
+//     console.log(formData);
 
-const data = {
-  name: `${e.target.firstName.value} ${e.target.lastName.value}`,
-  email: e.target.email.value,
-  message: e.target.message.value,
-  phone: e.target.phone.value
+//     try {
+//      const apiUrl = process.env.REACT_APP_API_URL || "https://www.mindronmeditech.com";
 
+// const res = await fetch(`${apiUrl}/send-email`, {
+//   method: "POST",
+//   headers: { "Content-Type": "application/json" },
+//   body: JSON.stringify(formData),
+// });
+
+
+//google form
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const name = `${e.target.firstName.value} ${e.target.lastName.value}`;
+  const email = e.target.email.value;
+  const phone = e.target.phone.value;
+  const message = e.target.message.value;
+
+  try {
+    await fetch("https://docs.google.com/forms/d/e/1FAIpQLSeEwcpyww9vM74dRwQ4x3nsKp9RWotYwmY0aY1wJpqJZb0uuA/formResponse", {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body:
+        "entry.72610541=" + encodeURIComponent(name) +
+        "&entry.834634778=" + encodeURIComponent(email) +
+        "&entry.1456370932=" + encodeURIComponent(phone) +
+        "&entry.1850985828=" + encodeURIComponent(message)
+    });
+
+    alert("✅ Message submitted successfully!");
+    e.target.reset();
+
+  } catch (error) {
+    alert("❌ Error submitting form");
+    console.error(error);
+  }
 };
 
 
-    try {
-      const res = await fetch('http://localhost:5000/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      const text = await res.text();
-
-      try {
-        const json = JSON.parse(text);
-        if (json.success) {
-          alert('✅ Message sent successfully!');
-          e.target.reset();
-        } else {
-          alert(`❌ Error: ${json.error || 'Unknown error'}`);
-        }
-      } catch (parseErr) {
-        alert('❌ Unexpected server response');
-      }
-    } catch (err) {
-      alert("❌ Something went wrong while submitting the form.");
-    }
-  };
+  //    const text = await res.text();
+ 
+  //     try {
+  //       const json = JSON.parse(text);
+  //       if (json.success) {
+  //         alert('✅ Message sent successfully!');
+  //         e.target.reset();
+  //       } else {
+  //         alert(`❌ Error: ${json.error || 'Unknown error'}`);
+  //       }
+  //     } catch (parseErr) {
+  //       alert('❌ Unexpected server response');
+  //     }
+  //   } catch (err) {
+  //     alert("❌ Something went wrong while submitting the form.");
+  //   }
+  // };
 
   useEffect(() => {
+      if (window.location.hostname === 'mindronmeditech.com') {
+    window.location.href = 'https://www.mindronmeditech.com' + window.location.pathname + window.location.search;
+  }
+  
     AOS.init({ duration: 1000, once: false });
 
     const handleResize = () => {
@@ -88,7 +127,7 @@ const data = {
   const imageStyle = {
     width: '100%',
     height: '100%',
-  objectFit: 'fill', // ✅ Corrected spelling
+    objectFit: 'fill', // ✅ Corrected spelling
     borderRadius: '8px',
     position: 'absolute',
     bottom: '0',
@@ -153,7 +192,7 @@ const data = {
   const formContainerStyle = {
     padding: isMobile ? '20px 0' : '30px 10%',
     marginTop: isMobile ? '0' : '-120px',
-      boxSizing: 'border-box' // ✅ Add this
+    boxSizing: 'border-box' // ✅ Add this
 
   };
 
@@ -190,7 +229,7 @@ const data = {
     border: '1px solid #ccc',
     width: '100%',
     minWidth: isMobile ? '100%' : 'auto',
-      boxSizing: 'border-box' // ✅ Important for layout
+    boxSizing: 'border-box' // ✅ Important for layout
 
   };
 
@@ -671,3 +710,5 @@ New York, NY 10036, USA.`,
 };
 
 export default Contact;
+
+
