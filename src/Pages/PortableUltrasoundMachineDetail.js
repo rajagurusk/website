@@ -91,7 +91,8 @@ const imageDetails = {
         'Left/right swivel: ±90°',
         '8-segment TGC sliders',
         'Retractable keyboard with targeted down-lighting',
-        'Probe temperature monitoring: patient reference temperature (PAT) and transducer tip temperature (TIP)'
+        'Probe temperature monitoring: patient reference temperature (PAT) and transducer tip temperature (TIP)',
+        'Resettable over current breaker for voltage protection'
       ],
       'Imaging Modes': [
         'B-mode',
